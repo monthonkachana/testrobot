@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.12.5 on win32)" generated="20240910 16:03:47.277" rpa="false" schemaversion="3">
+<suite id="s1" name="Checkposts" source="c:\Users\User\Desktop\test\Script\checkposts.robot">
+<test id="s1-t1" name="get vaule for json" line="38">
+<kw name="Get Request Data" library="Common">
+<var>${response}</var>
+<arg>Get User</arg>
+<arg>${BASE_URL}${ENDPOINT}1</arg>
+<kw name="GET" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${url}</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20240910 16:03:48.173" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/comments?postId=1 
+ path_url=/comments?postId=1 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20240910 16:03:48.179" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/comments?postId=1 
+ status=200, reason=OK 
+ headers={'Date': 'Tue, 10 Sep 2024 09:03:49 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1725795118&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;s=78C3gWEOywuz1QnpcQEMV2kZmc9W10R494hhwaH5DKc%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1725795118&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;s=78C3gWEOywuz1QnpcQEMV2kZmc9W10R494hhwaH5DKc%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'X-Ratelimit-Limit': '1000', 'X-Ratelimit-Remaining': '998', 'X-Ratelimit-Reset': '1725795127', 'Vary': 'Origin, Accept-Encoding', 'Access-Control-Allow-Credentials': 'true', 'Cache-Control': 'max-age=43200', 'Pragma': 'no-cache', 'Expires': '-1', 'X-Content-Type-Options': 'nosniff', 'Etag': 'W/"5e6-4bSPS5tq8F8ZDeFJULWh6upjp7U"', 'Content-Encoding': 'gzip', 'Via': '1.1 vegur', 'CF-Cache-Status': 'HIT', 'Age': '16254', 'Server': 'cloudflare', 'CF-RAY': '8c0e3f40ddc98970-SIN', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body=[
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+  },
+  {
+    "postId": 1,
+    "id": 4,
+    "name": "alias odio sit",
+    "email": "Lew@alysha.tv",
+    "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+  },
+  {
+    "postId": 1,
+    "id": 5,
+    "name": "vero eaque aliquid doloribus et culpa",
+    "email": "Hayden@althea.biz",
+    "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+  }
+] 
+ </msg>
+<msg timestamp="20240910 16:03:48.179" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240910 16:03:47.672" endtime="20240910 16:03:48.179"/>
+</kw>
+<msg timestamp="20240910 16:03:48.179" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240910 16:03:47.671" endtime="20240910 16:03:48.179"/>
+</kw>
+<kw name="Should Be Equal As Numbers" library="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<msg timestamp="20240910 16:03:48.181" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20240910 16:03:48.179" endtime="20240910 16:03:48.181"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.182" level="INFO">[
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+  },
+  {
+    "postId": 1,
+    "id": 4,
+    "name": "alias odio sit",
+    "email": "Lew@alysha.tv",
+    "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+  },
+  {
+    "postId": 1,
+    "id": 5,
+    "name": "vero eaque aliquid doloribus et culpa",
+    "email": "Hayden@althea.biz",
+    "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+  }
+]</msg>
+<status status="PASS" starttime="20240910 16:03:48.181" endtime="20240910 16:03:48.182"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${filename}</var>
+<arg>Post101</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240910 16:03:48.182" level="INFO">${filename} = Post101</msg>
+<status status="PASS" starttime="20240910 16:03:48.182" endtime="20240910 16:03:48.182"/>
+</kw>
+<kw name="WriteFile" library="Common">
+<var>${file_content}</var>
+<arg>CollectionFile</arg>
+<arg>${filename}</arg>
+<arg>${response.text}</arg>
+<kw name="Log" library="BuiltIn">
+<arg>${data}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.182" level="INFO">[
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+  },
+  {
+    "postId": 1,
+    "id": 4,
+    "name": "alias odio sit",
+    "email": "Lew@alysha.tv",
+    "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+  },
+  {
+    "postId": 1,
+    "id": 5,
+    "name": "vero eaque aliquid doloribus et culpa",
+    "email": "Hayden@althea.biz",
+    "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+  }
+]</msg>
+<status status="PASS" starttime="20240910 16:03:48.182" endtime="20240910 16:03:48.182"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>c:\\Users\\User\\Desktop\\test\\Resource/${Folder}/${filename}.json</arg>
+<arg>${data}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<msg timestamp="20240910 16:03:48.186" level="INFO" html="true">Created file '&lt;a href="file://c:\Users\User\Desktop\test\Resource\CollectionFile\Post101.json"&gt;c:\Users\User\Desktop\test\Resource\CollectionFile\Post101.json&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20240910 16:03:48.182" endtime="20240910 16:03:48.186"/>
+</kw>
+<kw name="Get File" library="OperatingSystem">
+<var>${file}</var>
+<arg>c:\\Users\\User\\Desktop\\test\\Resource/${Folder}/${filename}.json</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20240910 16:03:48.187" level="INFO" html="true">Getting file '&lt;a href="file://c:\Users\User\Desktop\test\Resource\CollectionFile\Post101.json"&gt;c:\Users\User\Desktop\test\Resource\CollectionFile\Post101.json&lt;/a&gt;'.</msg>
+<msg timestamp="20240910 16:03:48.187" level="INFO">${file} = [
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo...</msg>
+<status status="PASS" starttime="20240910 16:03:48.186" endtime="20240910 16:03:48.187"/>
+</kw>
+<msg timestamp="20240910 16:03:48.187" level="INFO">${file_content} = [
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo...</msg>
+<status status="PASS" starttime="20240910 16:03:48.182" endtime="20240910 16:03:48.187"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${file_content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.189" level="INFO">[
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione"
+  },
+  {
+    "postId": 1,
+    "id": 4,
+    "name": "alias odio sit",
+    "email": "Lew@alysha.tv",
+    "body": "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+  },
+  {
+    "postId": 1,
+    "id": 5,
+    "name": "vero eaque aliquid doloribus et culpa",
+    "email": "Hayden@althea.biz",
+    "body": "harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et"
+  }
+]</msg>
+<status status="PASS" starttime="20240910 16:03:48.187" endtime="20240910 16:03:48.189"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${file_content}</arg>
+<arg>${response.text}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20240910 16:03:48.189" endtime="20240910 16:03:48.190"/>
+</kw>
+<kw name="Load JSON From File For JSON" library="Common">
+<var>${Rawdata}</var>
+<arg>CollectionFile</arg>
+<arg>Post101</arg>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${json_data}</var>
+<arg>c:\\Users\\User\\Desktop\\test\\Resource/${Folder}/${file_path}.json</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20240910 16:03:48.191" level="INFO">${json_data} = [{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor q...</msg>
+<status status="PASS" starttime="20240910 16:03:48.190" endtime="20240910 16:03:48.191"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${json_data}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.191" level="INFO">[{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium'}, {'postId': 1, 'id': 2, 'name': 'quo vero reiciendis velit similique earum', 'email': 'Jayne_Kuhic@sydney.com', 'body': 'est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et'}, {'postId': 1, 'id': 3, 'name': 'odio adipisci rerum aut animi', 'email': 'Nikita@garfield.biz', 'body': 'quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione'}, {'postId': 1, 'id': 4, 'name': 'alias odio sit', 'email': 'Lew@alysha.tv', 'body': 'non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati'}, {'postId': 1, 'id': 5, 'name': 'vero eaque aliquid doloribus et culpa', 'email': 'Hayden@althea.biz', 'body': 'harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et'}]</msg>
+<status status="PASS" starttime="20240910 16:03:48.191" endtime="20240910 16:03:48.191"/>
+</kw>
+<msg timestamp="20240910 16:03:48.191" level="INFO">${Rawdata} = [{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor q...</msg>
+<status status="PASS" starttime="20240910 16:03:48.190" endtime="20240910 16:03:48.191"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Rawdata}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.193" level="INFO">[{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium'}, {'postId': 1, 'id': 2, 'name': 'quo vero reiciendis velit similique earum', 'email': 'Jayne_Kuhic@sydney.com', 'body': 'est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et'}, {'postId': 1, 'id': 3, 'name': 'odio adipisci rerum aut animi', 'email': 'Nikita@garfield.biz', 'body': 'quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione'}, {'postId': 1, 'id': 4, 'name': 'alias odio sit', 'email': 'Lew@alysha.tv', 'body': 'non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati'}, {'postId': 1, 'id': 5, 'name': 'vero eaque aliquid doloribus et culpa', 'email': 'Hayden@althea.biz', 'body': 'harum non quasi et ratione\ntempore iure ex voluptates in ratione\nharum architecto fugit inventore cupiditate\nvoluptates magni quo et'}]</msg>
+<status status="PASS" starttime="20240910 16:03:48.193" endtime="20240910 16:03:48.193"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${Rawdata}</var>
+<arg>${Rawdata}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20240910 16:03:48.193" level="INFO">${Rawdata} = [{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor q...</msg>
+<status status="PASS" starttime="20240910 16:03:48.193" endtime="20240910 16:03:48.193"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${Rawdata}</var>
+<arg>${Rawdata}</arg>
+<arg>\\n</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20240910 16:03:48.195" level="INFO">${Rawdata} = [{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam ...</msg>
+<status status="PASS" starttime="20240910 16:03:48.195" endtime="20240910 16:03:48.195"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${Rawdata}</var>
+<arg>${Rawdata}</arg>
+<arg>},</arg>
+<arg>},\n</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20240910 16:03:48.197" level="INFO">${Rawdata} = [{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam ...</msg>
+<status status="PASS" starttime="20240910 16:03:48.195" endtime="20240910 16:03:48.197"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${Rawdata}</var>
+<arg>${Rawdata}</arg>
+<arg>[</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20240910 16:03:48.198" level="INFO">${Rawdata} = {'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam a...</msg>
+<status status="PASS" starttime="20240910 16:03:48.198" endtime="20240910 16:03:48.198"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${Rawdata}</var>
+<arg>${Rawdata}</arg>
+<arg>]</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20240910 16:03:48.198" level="INFO">${Rawdata} = {'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam a...</msg>
+<status status="PASS" starttime="20240910 16:03:48.198" endtime="20240910 16:03:48.198"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${Rawdata}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.198" level="INFO">{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam autem quasireiciendis et nam sapiente accusantium'},
+ {'postId': 1, 'id': 2, 'name': 'quo vero reiciendis velit similique earum', 'email': 'Jayne_Kuhic@sydney.com', 'body': 'est natus enim nihil est dolore omnis voluptatem numquamet omnis occaecati quod ullam atvoluptatem error expedita pariaturnihil sint nostrum voluptatem reiciendis et'},
+ {'postId': 1, 'id': 3, 'name': 'odio adipisci rerum aut animi', 'email': 'Nikita@garfield.biz', 'body': 'quia molestiae reprehenderit quasi aspernaturaut expedita occaecati aliquam eveniet laudantiumomnis quibusdam delectus saepe quia accusamus maiores nam estcum et ducimus et vero voluptates excepturi deleniti ratione'},
+ {'postId': 1, 'id': 4, 'name': 'alias odio sit', 'email': 'Lew@alysha.tv', 'body': 'non et atqueoccaecati deserunt quas accusantium unde odit nobis qui voluptatemquia voluptas consequuntur itaque doloret qui rerum deleniti ut occaecati'},
+ {'postId': 1, 'id': 5, 'name': 'vero eaque aliquid doloribus et culpa', 'email': 'Hayden@althea.biz', 'body': 'harum non quasi et rationetempore iure ex voluptates in rationeharum architecto fugit inventore cupiditatevoluptates magni quo et'}</msg>
+<status status="PASS" starttime="20240910 16:03:48.198" endtime="20240910 16:03:48.198"/>
+</kw>
+<kw name="Split To Lines" library="String">
+<var>@{lines}</var>
+<arg>${Rawdata}</arg>
+<doc>Splits the given string to lines.</doc>
+<msg timestamp="20240910 16:03:48.202" level="INFO">5 lines returned</msg>
+<msg timestamp="20240910 16:03:48.202" level="INFO">@{lines} = [ {'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam...</msg>
+<status status="PASS" starttime="20240910 16:03:48.198" endtime="20240910 16:03:48.202"/>
+</kw>
+<kw name="Log Many" library="BuiltIn">
+<arg>@{lines}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<msg timestamp="20240910 16:03:48.202" level="INFO">{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam autem quasireiciendis et nam sapiente accusantium'},</msg>
+<msg timestamp="20240910 16:03:48.202" level="INFO"> {'postId': 1, 'id': 2, 'name': 'quo vero reiciendis velit similique earum', 'email': 'Jayne_Kuhic@sydney.com', 'body': 'est natus enim nihil est dolore omnis voluptatem numquamet omnis occaecati quod ullam atvoluptatem error expedita pariaturnihil sint nostrum voluptatem reiciendis et'},</msg>
+<msg timestamp="20240910 16:03:48.202" level="INFO"> {'postId': 1, 'id': 3, 'name': 'odio adipisci rerum aut animi', 'email': 'Nikita@garfield.biz', 'body': 'quia molestiae reprehenderit quasi aspernaturaut expedita occaecati aliquam eveniet laudantiumomnis quibusdam delectus saepe quia accusamus maiores nam estcum et ducimus et vero voluptates excepturi deleniti ratione'},</msg>
+<msg timestamp="20240910 16:03:48.202" level="INFO"> {'postId': 1, 'id': 4, 'name': 'alias odio sit', 'email': 'Lew@alysha.tv', 'body': 'non et atqueoccaecati deserunt quas accusantium unde odit nobis qui voluptatemquia voluptas consequuntur itaque doloret qui rerum deleniti ut occaecati'},</msg>
+<msg timestamp="20240910 16:03:48.202" level="INFO"> {'postId': 1, 'id': 5, 'name': 'vero eaque aliquid doloribus et culpa', 'email': 'Hayden@althea.biz', 'body': 'harum non quasi et rationetempore iure ex voluptates in rationeharum architecto fugit inventore cupiditatevoluptates magni quo et'}</msg>
+<status status="PASS" starttime="20240910 16:03:48.202" endtime="20240910 16:03:48.202"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${CountRawData}</var>
+<arg>${lines}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20240910 16:03:48.203" level="INFO">Length is 5</msg>
+<msg timestamp="20240910 16:03:48.203" level="INFO">${CountRawData} = 5</msg>
+<status status="PASS" starttime="20240910 16:03:48.203" endtime="20240910 16:03:48.203"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${CountRawData}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${RawData}</var>
+<arg>${lines}[${i}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240910 16:03:48.205" level="INFO">${RawData} = {'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam a...</msg>
+<status status="PASS" starttime="20240910 16:03:48.205" endtime="20240910 16:03:48.205"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${RawData}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240910 16:03:48.206" level="INFO">{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam autem quasireiciendis et nam sapiente accusantium'},</msg>
+<status status="PASS" starttime="20240910 16:03:48.205" endtime="20240910 16:03:48.206"/>
+</kw>
+<if>
+<branch type="IF" condition="'${RawData}' != '${EMPTY}'">
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${userId}</var>
+<arg>${RawData}</arg>
+<arg>$..userId</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.207" endtime="20240910 16:03:48.207"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${id}</var>
+<arg>${RawData}</arg>
+<arg>$..id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.207" endtime="20240910 16:03:48.207"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${title}</var>
+<arg>${RawData}</arg>
+<arg>$..title</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.207" endtime="20240910 16:03:48.207"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${completed}</var>
+<arg>${RawData}</arg>
+<arg>$..completed</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.207" endtime="20240910 16:03:48.209"/>
+</kw>
+<msg timestamp="20240910 16:03:48.209" level="FAIL">Evaluating IF condition failed: Evaluating expression ''{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam autem quasireiciendis et nam sapiente accusantium'},' != ''' failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</msg>
+<status status="FAIL" starttime="20240910 16:03:48.206" endtime="20240910 16:03:48.209"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Variable" library="BuiltIn">
+<var>${postId}</var>
+<arg>NULL</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.209" endtime="20240910 16:03:48.209"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${name}</var>
+<arg>NULL</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.210" endtime="20240910 16:03:48.210"/>
+</kw>
+<status status="NOT RUN" starttime="20240910 16:03:48.209" endtime="20240910 16:03:48.210"/>
+</branch>
+<status status="FAIL" starttime="20240910 16:03:48.206" endtime="20240910 16:03:48.210"/>
+</if>
+<kw name="Comment" library="BuiltIn">
+<arg>Should Be Equal</arg>
+<arg>${postId}</arg>
+<arg>${expectedpostId}</arg>
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.210" endtime="20240910 16:03:48.210"/>
+</kw>
+<kw name="Comment" library="BuiltIn">
+<arg>Should Be Equal</arg>
+<arg>${name}</arg>
+<arg>${expectedname}</arg>
+<doc>Displays the given messages in the log file as keyword arguments.</doc>
+<status status="NOT RUN" starttime="20240910 16:03:48.210" endtime="20240910 16:03:48.211"/>
+</kw>
+<status status="FAIL" starttime="20240910 16:03:48.204" endtime="20240910 16:03:48.211"/>
+</iter>
+<status status="FAIL" starttime="20240910 16:03:48.204" endtime="20240910 16:03:48.211"/>
+</for>
+<status status="FAIL" starttime="20240910 16:03:47.670" endtime="20240910 16:03:48.211">Evaluating IF condition failed: Evaluating expression ''{'postId': 1, 'id': 1, 'name': 'id labore ex et quam laborum', 'email': 'Eliseo@gardner.biz', 'body': 'laudantium enim quasi est quidem magnam voluptate ipsam eostempora quo necessitatibusdolor quam autem quasireiciendis et nam sapiente accusantium'},' != ''' failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</test>
+<status status="FAIL" starttime="20240910 16:03:47.282" endtime="20240910 16:03:48.213"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Checkposts">Checkposts</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20240910 16:03:47.659" level="ERROR">Error in file 'c:\Users\User\Desktop\test\Resource\import.robot' on line 12: Processing variable file 'PreparaData/userdata.json' failed: Importing variable file 'PreparaData/userdata.json' failed: ModuleNotFoundError: No module named 'PreparaData/userdata'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\robotframework_debug_adapter
+  C:\Users\User\Desktop\test
+  C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages
+  C:\Users\User\AppData\Local\Programs\Python\Python312\Lib\site-packages\robotframework_ls\vendored
+  C:\Users\User\AppData\Local\Programs\Python\Python312\python312.zip
+  C:\Users\User\AppData\Local\Programs\Python\Python312\DLLs
+  C:\Users\User\AppData\Local\Programs\Python\Python312\Lib
+  C:\Users\User\AppData\Local\Programs\Python\Python312</msg>
+</errors>
+</robot>
