@@ -21,6 +21,7 @@ Library    ../py/save_blob.py
 Library    ../py/StringKeyword.py
 
 Variables    content.yaml
+Variables    api.yaml
 Variables    PreparaData/userdata.json
 
 
