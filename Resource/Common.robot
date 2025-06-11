@@ -1,5 +1,6 @@
 *** Settings ***
-Resource    import.robot
+# Resource    import.robot
+Resource    ../Resource/import.robot
 *** Keywords ***
 
 Open Browser With Chrome
