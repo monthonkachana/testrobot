@@ -1,0 +1,40 @@
+mpp_regis:
+    host: http://10.209.6.241
+
+mpp_lookup:
+    host: http://10.209.6.236
+
+db:
+    cpg711:
+        username: CPG711
+        password: 711cdev##1
+        conn_str: 10.224.102.10:2992/pdev
+
+############### Migrate site BBL to BBT (LINUX) ###############
+api_regis_linux:
+    host: https://10.234.1.12
+
+api_regis_solaris:
+    host: http://10.209.6.41:7101
+
+db_linux:
+    lookup:
+        node1:
+            username: MPPREG
+            password: password
+            conn_str: 10.232.193.116:1522/MPLK21
+        node2:
+            username: MPPREG
+            password: password
+            conn_str: 10.232.193.118:1522/MPRG20
+
+db_solaris:
+    lookup:
+        node1:
+            username: mpplkpuser
+            password: password
+            conn_str: 10.208.6.36:1522/MPLK11
+        node2:
+            username: mpplkpuser
+            password: password
+            conn_str: 10.208.6.37:1522/MPLK12
