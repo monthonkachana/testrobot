@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../../Resource/import.robot
+Resource  ../../resources/imports.robot
 *** Variables ***
 @{NAMES}    John    Alice    Bob    Charlie    David    Emma    Frank    Grace    Mac    Mon  
 ...    Ko    Pop    Hey    Sam    Lily    Jack    Mia    Tom    Lucy    Max  
@@ -42,12 +42,9 @@ Sead dark brown mule round before 19:00
 Sead dark brown mule round before 09:00 for CXL
     [Tags]    09:00
     Genarate file upload dark brown mule is 09 for CXL
-    api filetobase64 xlsx
-    api uploadfile
-    api uploadfile confirm
-    api filetobase64 xlsx CXL
-    api uploadfile
-    api uploadfile confirm
+    api filetobase64 xlsx for loop CXL
+    api uploadfile for loop CXL
+    api uploadfile confirm for loop CXL
 clear DB to night 
     [Tags]    Clear
     get current datetime dark brown mule max
@@ -126,6 +123,35 @@ api filetobase64 xlsx
     Log    ${response.json()}
     Log    ${response.json()}[fileName]
     Log    ${response.json()}[fileContent]
+api filetobase64 xlsx for loop CXL
+    ${list_data_filebase64}    Create List
+    FOR  ${i}  IN RANGE  ${legth_query}
+    log    ${list_file}[${i}]
+    ${API_URL}=   Set Variable     ${Host_GET}
+    ${user-id-api}=   Set Variable     002cfr
+    ${FILE_PATH}=   Set Variable     ${CURDIR}/../../keywords/Download/${list_file}[${i}]
+    Set Test Variable    ${user-id-api}
+    ${HEADERS}=   Create Dictionary   
+    ...    Accept=*/*
+    ...    X-Institution-Id=002
+    ...    X-Roles=xxx
+    ...    X-User-Id=xxx
+    # ...    Content-Type=multipart/form-data
+    ${file_content}=   Get Binary File   ${FILE_PATH}
+    log      ${file_content}
+    ${file_tuple}=   Create List   ${list_file}[${i}]   ${file_content}   application/octet-stream
+    # ชื่อไฟล์ set นี้ test.xlsx
+    ${files}=   Create Dictionary   inputFileName=${list_file}[${i}]   inputFileContent=${file_tuple}
+    Create Session  Brownmulefiletobase64  ${API_URL}     headers=${HEADERS}
+    ${response}=    POST On Session   Brownmulefiletobase64  ${path.Brownmulefiletobase64}  files=${files}  expected_status=any
+    Append To List    ${list_data_filebase64}    ${response.json()}
+    # Set Test Variable   ${data_filebase64}     ${response}
+    Log    ${response.status_code}
+    Log    ${response.json()}
+    Log    ${response.json()}[fileName]
+    Log    ${response.json()}[fileContent]
+    END
+    Set Test Variable    ${list_data_filebase64}
 api filetobase64 xlsx CXL
     ${API_URL}=   Set Variable     ${Host_GET}
     ${user-id-api}=   Set Variable     002cfr
@@ -171,6 +197,59 @@ api uploadfile
     ${fileId}    Get From Dictionary    ${response.json()}    fileId
     Set Test Variable    ${fileId}
     Log    File ID: ${fileId}
+api uploadfile for loop CXL
+    ${list_data_uploadfile}    Create List
+    FOR  ${i}  IN RANGE  ${legth_query}
+    log    ${list_data_filebase64}[${i}]
+    ${res}    Set Variable    ${list_data_filebase64}[${i}]
+    log    ${res}[fileName]
+    log    ${res}[fileContent]
+    ${API_URL}=   Set Variable     ${Host_GET}
+    ${HEADERS}=   Create Dictionary
+    ...    Accept=*/*
+    ...    X-Institution-Id=002
+    ...    X-Roles=xxx
+    ...    X-User-Id=xxx
+    ...    Content-Type=application/json
+    ${payload}=   Create Dictionary
+    ...    fileName=${res}[fileName]
+    ...    fileContent=${res}[fileContent]
+
+    Create Session  BrownmuleUploadFile  ${API_URL}  headers=${HEADERS}
+    ${response}=    POST On Session   BrownmuleUploadFile  
+    ...    /fraud-brown-mule/upload-file  
+    ...    json=${payload}  
+    ...    expected_status=any
+    Log    ${response.status_code}
+    Log    ${response.json()}
+    Append To List    ${list_data_uploadfile}    ${response.json()}
+    Set Test Variable    ${list_data_uploadfile}
+    ${fileId}    Get From Dictionary    ${response.json()}    fileId
+    Set Test Variable    ${fileId}
+    Log    File ID: ${fileId}
+    END
+api uploadfile confirm for loop CXL
+    FOR  ${i}  IN RANGE  ${legth_query}
+    log    ${list_data_uploadfile}[${i}]
+    ${res}    Set Variable    ${list_data_uploadfile}[${i}]
+    ${API_URL}=   Set Variable     ${Host_GET}
+    ${HEADERS}=   Create Dictionary
+    ...    Accept=*/*
+    ...    X-Institution-Id=002
+    ...    X-Roles=xxx
+    ...    X-User-Id=xxx
+    ...    Content-Type=application/json
+    ${payload}=   Create Dictionary
+    ...    id=${res}[fileId]
+    Create Session  BrownmuleUploadFileToconfirm  ${API_URL}  headers=${HEADERS}
+    ${response}=    POST On Session   BrownmuleUploadFileToconfirm  
+    ...    /fraud-brown-mule/upload-file/confirm
+    ...    json=${payload}  
+    ...    expected_status=any
+    Log    ${response.status_code}
+    Log    ${response.json()}
+    Should Be Equal As Integers    ${response.status_code}    200
+    END
 api uploadfile confirm
     ${API_URL}=   Set Variable     ${Host_GET}
     ${HEADERS}=   Create Dictionary
@@ -223,15 +302,25 @@ Genarate file upload dark brown mule is ${date}
     Copy File    ${CURDIR}/../../keywords/PreparaData/${prepara_filename}.xlsx    ${CURDIR}/../../keywords/Download/${filename}.xlsx
 Genarate file upload dark brown mule is ${date} for CXL
     get current datetime dark brown mule max
-    Set Running Number Based On Date ${date}
-    ${prepara_filename}     Set Variable    BrownMule_Registry_V1.0_002_NEW_${date}o'clock
-    ${prepara_filename_CXL}     Set Variable    BrownMule_Registry_V1.0_002_CXL_${date}o'clock
-    ${filename}     Set Variable    BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_${runingnumber}
-    ${filename_CXL}     Set Variable    BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI}_${runingnumber}
-    Set Test Variable    ${filename}
-    Set Test Variable    ${filename_CXL}
-    Copy File    ${CURDIR}/../../keywords/PreparaData/${prepara_filename}.xlsx    ${CURDIR}/../../keywords/Download/${filename}.xlsx
-    Copy File    ${CURDIR}/../../keywords/PreparaData/${prepara_filename_CXL}.xlsx    ${CURDIR}/../../keywords/Download/${filename_CXL}.xlsx
+    connect to cfr database horse
+    ${list_file}    Create List
+    ${sql_files} =    Evaluate    ', '.join(["'{}'".format(f) for f in ['BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_115.xlsx', 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_111.xlsx', 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_119.xlsx']])
+    ${sql} =    Set Variable    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO bmufi WHERE FILE_NAME IN (${sql_files})
+    ${query}=   query_all     ${db_connect}     ${sql}     # query
+    ${legth_query}    Get Length    ${query}
+    Set Test Variable    ${legth_query}
+    FOR  ${i}  IN RANGE   ${legth_query}
+    ${result}=   set variable    ${query[${i}]}
+    ${ID_INFO}=    set variable    ${result}[FILE_NAME]
+    ${replace_name}=    Replace String    ${ID_INFO}    _NEW_    _CXL_
+    ${matches}=    Get Regexp Matches    ${replace_name}    _(\\d{3})\\.xlsx$
+    ${date}=       Set Variable    ${matches[0]}
+    ${prepara_filename_CXL}     Set Variable    BrownMule_Registry_V1.0_002_CXL${date}
+    ${filename_CXL}     Set Variable    ${replace_name}
+    Append To List         ${list_file}       ${filename_CXL}
+    Copy File    ${CURDIR}/../../keywords/PreparaData/${prepara_filename_CXL}    ${CURDIR}/../../keywords/Download/${filename_CXL}
+    END
+    Set Test Variable    ${list_file}
 clear DB 
         connect to cfr database horse
         ${sql_files} =    Evaluate    ', '.join(["'{}'".format(f) for f in ['BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_115.xlsx', 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_111.xlsx', 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_119.xlsx']])
@@ -285,7 +374,8 @@ clear DB CXL and NEW
 
 check DB status detail is ${status} before Clear 
         connect to cfr database horse
-        ${filenameDATE_YMD_THAI_V1}    Set Variable    ${filenameDATE_YMD_THAI_V1}%
+        # ${filenameDATE_YMD_THAI_V1}    Set Variable    ${filenameDATE_YMD_THAI_V1}%
+        ${filenameDATE_YMD_THAI_V1}    Set Variable    ${thai_year}-__-__%
         ${sql} =    catenate    SELECT COUNT(*) FROM BROWN_MULE_UPLOAD_FILE_INFO bmufi WHERE STATUS_DETAIL = 'REJECT_ALL' AND ( FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_111.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_115.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_${filenameDATE_YMD_THAI_V1}_119.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_${filenameDATE_YMD_THAI_V1}_009.xlsx')
         # ${sql_detail} =    catenate    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO bmufi WHERE STATUS_DETAIL = 'REJECT_ALL' AND ( FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_2568-04-%_111.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_2568-04-%_115.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_2568-04-%_119.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_2568-04-%_009.xlsx')
         ${query}=   query_all     ${db_connect}     ${sql}     # query
@@ -306,11 +396,14 @@ check DB status detail is ${status} before Clear
     # END  
 
 clear DB for loop
-    @{FILE_NAMES}    Set Variable       BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_115.xlsx    BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_111.xlsx    BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_119.xlsx
     connect to cfr database horse
-    ${sql_files}=    Evaluate    ', '.join(["'{}'".format(f) for f in ${FILE_NAMES}])
-    ${sql}=    Set Variable    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO WHERE FILE_NAME IN (${sql_files})
+    ${filenameDATE_YMD_THAI_V1}    Set Variable    ${thai_year}-__-__%
+    ${sql} =    catenate    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO bmufi WHERE STATUS_DETAIL = 'SUCCESS' AND ( FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_111.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_115.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_${filenameDATE_YMD_THAI_V1}_119.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_${filenameDATE_YMD_THAI_V1}_009.xlsx')
+    # @{FILE_NAMES}    Set Variable       BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_115.xlsx    BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_111.xlsx    BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI_V1}_119.xlsx
+    # ${sql_files}=    Evaluate    ', '.join(["'{}'".format(f) for f in ${FILE_NAMES}])
+    # ${sql}=    Set Variable    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO WHERE FILE_NAME IN (${sql_files})
     ${query}=    Query All    ${db_connect}    ${sql}
+    Log To Console    ${sql}
     ${num_files}=    Get Length    ${query}
     FOR    ${index}    IN RANGE    ${num_files}
         ${result}=    Set Variable    ${query[${index}]}
@@ -329,10 +422,12 @@ clear DB for loop
     END
 
 clear DB for loop CXL
-    @{FILE_NAMES}    Set Variable       BrownMule_Registry_V1.0_002_NEW_${filenameDATE_YMD_THAI}_009.xlsx    BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI}_009.xlsx
     connect to cfr database horse
-    ${sql_files}=    Evaluate    ', '.join(["'{}'".format(f) for f in ${FILE_NAMES}])
-    ${sql}=    Set Variable    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO WHERE FILE_NAME IN (${sql_files})
+    ${filenameDATE_YMD_THAI_V1}    Set Variable    ${thai_year}-__-__%
+    ${sql} =    catenate    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO bmufi WHERE    FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI_V1}_111.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI_V1}_115.xlsx' OR FILE_NAME LIKE 'BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI_V1}_119.xlsx'
+    # @{FILE_NAMES}    Set Variable    BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI_V1}_111.xlsx    BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI_V1}_115.xlsx    BrownMule_Registry_V1.0_002_CXL_${filenameDATE_YMD_THAI_V1}_119.xlsx
+    # ${sql_files}=    Evaluate    ', '.join(["'{}'".format(f) for f in ${FILE_NAMES}])
+    # ${sql}=    Set Variable    SELECT * FROM BROWN_MULE_UPLOAD_FILE_INFO WHERE FILE_NAME IN (${sql_files})
     ${query}=    Query All    ${db_connect}    ${sql}
     ${num_files}=    Get Length    ${query}
     FOR    ${index}    IN RANGE    ${num_files}

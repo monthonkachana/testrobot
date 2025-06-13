@@ -20,8 +20,9 @@ Library    ../py/RandomGeneratorLibrary.py
 Library    ../py/save_blob.py
 Library    ../py/StringKeyword.py
 
-Variables    content.yaml
-Variables    api.yaml
+Variables    ../config/api.yaml
+Variables    ../config/content.yaml
+Variables    ../config/env.yaml
 Variables    PreparaData/userdata.json
 
 
