@@ -1,0 +1,205 @@
+resp:
+    http_resp:
+        success: '<Response [200]>'
+        not_found: '<Response [404]>'
+        fobidden: '<Response [403]>'
+        Method_Not_Allowed: '<Response [405]>'
+        internal_server_error: '<Response [500]>'
+        URL_is_empty: 'Request URL is empty'
+    service_resp:
+        success:
+            code: '000'
+        exits_proxy:
+            code: '710'
+        Participant_is_retired:
+            code: '703'
+        Structural_failure:
+            code: '602'
+        proxy_type_invalid:
+            code: '802'
+        acc_type_invalid:
+            code: '902'
+        acc_different_participant:
+            code: '927'
+        proxy_registered_with_different_participant:
+            code: '800'
+        Proxy_type_not_supported_by_participant:
+            code: '811'
+        participant_does_not_support:
+            code: '932'
+        account_name_does_not_match_existing:
+            code: '926'
+        authentication_failure:
+            code: '601'
+        proxy_not_registered_mpp:
+            code: '801'
+        proxy_account_combination_not_registered_mpp:
+             code: '907'
+        account_not_registered_mpp:
+             code: '930'
+        account_status_not_valid:
+             code: '936'
+        account_status_not_valid_deactive:
+             code: '940'
+Res_Aoc:
+    success:
+        Freeze_Account_success:
+                code: '0000'
+                msg: 'SUCCESS'
+        UnFreeze_Account_success:
+                code: '0000'
+                msg: 'SUCCESS'
+        Submit_Police_success:
+                code: '0000'
+                msg: 'SUCCESS'
+        Request_Money_Trail_success:
+                code: '0000'
+                msg: 'SUCCESS'
+    Fail:
+        BankCaseID_does_not_found:
+                    code: '6600'
+                    msg: 'BankCaseID does not found'
+        Invalid_format_BankCaseID:
+                    code: '6606'
+                    msg: 'Invalid format: bankcaseid'
+        Invalid_format_warrant_type:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_type'
+        Invalid_format_warrant_date:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_date'
+        Invalid_format_warrant_id:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_id'
+        Invalid_format_account_no :
+                    code: '6606'
+                    msg: 'Invalid format: account_no'
+        Invalid_format_warrant_time:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_time'
+        Invalid_format_ref_freeze_warrant:
+                    code: '6606'
+                    msg: 'Invalid format: ref_freeze_warrant'
+        Invalid_format_bank_code:
+                    code: '6606'
+                    msg: 'Invalid format: bank_code'
+        Invalid_warrant_type:
+                    code: '6601'
+                    msg: 'Invalid warrant_type'
+        Invalid_value_condition_warrant_type:
+                    code: '6607'
+                    msg: 'Invalid value condition: warrant_type'
+        Invalid_value_condition_warrant_id:
+                    code: '6607'
+                    msg: 'Invalid value condition: warrant_id'
+        Missing_require_field_bankcaseid:
+                    code: '6605'
+                    msg: 'Missing require field: bankcaseid'
+        Missing_require_field_warrant_date:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_date'
+        Missing_require_field_warrant_time:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_time'
+        Missing_require_field_warrant_type:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_type'
+        Missing_require_field_warrant_id:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_id'
+        Missing_require_field_account_no:
+                    code: '6605'
+                    msg: 'Missing require field: account_no'
+        Missing_require_field_ref_freeze_warrant:
+                    code: '6605'
+                    msg: 'Missing require field: ref_freeze_warrant'
+        Missing_require_field_bank_code:
+                    code: '6605'
+                    msg: 'Missing require field: bank_code'
+        ref_freeze_warrant_cannot_be_found:
+                    code: '6603'
+                    msg: 'ref_freeze_warrant cannot be found'
+        Request_body_contain_invalid_format:
+                    code: '6400'
+                    msg: 'Request body contain invalid format'
+        Participant6403:
+                    code: '6403'
+                    msg: 'Participant does not subscribe to this service.'
+ResHS:
+    Success:
+        code: '0000'
+        msg: 'SUCCESS'
+    bankcase_not_found:
+        code: '6600'
+        msg: 'BankCaseID does not found'
+    Missing_require_warrant:
+        code: '6605'
+        msg: 'Missing require field: warrant_id'
+        msg_type: 'Missing require field: warrant_type'
+        msg_bank: 'Missing require field: bankcaseid'
+        msg_date: 'Missing require field: warrant_date'
+        msg_time: 'Missing require field: warrant_time'
+    Invalid_format_warrant:
+        code: '6606'
+        msg: 'Invalid format: warrant_id'
+        msg_type: 'Invalid format: warrant_type'
+        msg_date: 'Invalid format: warrant_date'
+        msg_time: 'Invalid format: warrant_time'
+    Invalid_warrant:
+        code: '6601'
+        msg: 'Invalid warrant_type'
+    Invalid_value_condition:
+        code: '6607'
+        msg_id: 'Invalid value condition: warrant_id'
+        msg_date: 'Invalid value condition: warrant_date'
+        msg_time: 'Invalid value condition: warrant_time'
+        msg_type: 'Invalid value condition: warrant_type'
+    bankcase_bound_warrant_id:
+        code: '6608'
+        msg: 'bankcaseid has been bound with other warrant_id'
+    Invalid_Header_csv_file_format:
+        code: '6100'
+        msg: 'INVALID_HEADER_CSV_FILE_FORMAT'
+    Invalid_file_name:
+        code: '6103'
+        msg: 'INVALID_FILE_NAME_FORMAT'
+    Invalid_file_structure:
+        code: '6105'
+        msg: 'INVALID_FILE_STRUCTURE'
+    SOME_ITEM_DUPLICATE:
+        code: '6108'
+        msg: 'SOME_ITEM_DUPLICATE'
+    invalid_date_no_filename:
+        code: '6109'
+        msg: 'INVALID_DATE_ON_FILENAME'
+    duplicate_filename:
+        code: '6110'
+        msg: 'DUPLICATE_FILENAME'
+    invalid_file_format:
+        code: '6112'
+        msg: 'INVALID_FILE_FORMAT'
+    invalid_req_format:
+        code: '6113'
+        msg: 'INVALISYSTEM_REQUIRED_AT_LEAST_ONE_TRANSACTIOND_FILE_FORMAT'
+WithDraw:
+    Success:
+        code: '0000'
+        msg: 'SUCCESS'
+    invalid_declare_uuid:
+        code: '6706'
+        msg: 'Invalid format: declare_uuid'
+    invalid_declare_type_code:
+        code: '6706'
+        msg: 'Invalid format: declare_type_code'
+    invalid_declare_date:
+        code: '6706'
+        msg: 'Invalid format: declare_date'
+    invalid_declare_type:
+        code: '6706'
+        msg: 'Invalid format: declare_type'
+    invalid_declare_note:
+        code: '6706'
+        msg: 'Invalid format: declare_note'
+    invalid_mule_ref_code:
+        code: '6706'
+        msg: 'Invalid format: mule_ref_code'
