@@ -1,0 +1,11 @@
+account : 
+  username_pass: 'tomsmith'
+  username_fail: 'tomholland'
+  password_pass: 'SuperSecretPassword!'
+  password_fail: 'Password!'
+
+message_status:
+  message_login_username_error : "Your username is invalid!"
+  message_login_password_error : "Your password is invalid!"
+  message_login_success : "You logged into a secure area!"
+  message_logout : "You logged out of the secure area!"

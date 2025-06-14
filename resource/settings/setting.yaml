@@ -1,0 +1,9 @@
+accept:             '*/*'
+accept_encoding:     gzip, deflate, br
+connection:          keep-alive
+x_api_key:           reqres-free-v1
+end_point_1:           https://reqres.in/api/users/12
+end_point_2:           https://reqres.in/api/users/1234
+
+
+

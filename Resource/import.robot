@@ -1,32 +1,44 @@
 *** Settings ***
-Library    SeleniumLibrary
-Library    JSONLibrary
-# Library    JsonValidator
-Library    RequestsLibrary
-Library    OperatingSystem
-Library    Collections
-Library    String
-Library    ../py/pyramid.py
-Library    ../py/ConnectionDB.py
-# Library    ../py/create.py
-Library    ../py/CSVLibrary.py
-Library    ../py/Decrypt_GPG.py
-Library    ../py/FileKeyword.py
-Library    ../py/gen-hash.py
-# Library    ../py/hash.py
-Library    ../py/httpRequest.py
-Library    ../py/OperatingSystemLibrary.py
-Library    ../py/RandomGeneratorLibrary.py
-Library    ../py/save_blob.py
-Library    ../py/StringKeyword.py
+Library        SeleniumLibrary
+Library        String
+Library        OperatingSystem
+Library        Collections
+Library        DatabaseLibrary
+Library        pymysql
+Library        DateTime
+Library        ExcelLibrary
+Library        ExcelRobot
+Library        REST
+Library        RequestsLibrary
+#Dobby
+Resource       DobbyCommonLibrary/DobbyCommon.robot
+Resource       DobbyCommonLibrary/DobbyWebCommon.robot
 
-Variables    content.yaml
-Variables    PreparaData/userdata.json
+#api
+Resource      ${CURDIR}/../keywords/web/api/ttb_api.robot
 
+#common
+Resource      ${CURDIR}/../keywords/web/common/common.robot
 
-# Resource    Common.robot เก็บ resource file (.robot/.resource)
-Resource    ../Resource/Common.robot
-Resource    ../Resource/Keyword/common_api.robot
-Resource    ../Resource/Keyword/common_DB.robot
-Resource    ../Resource/Keyword/common_DB.robot
-Resource    ../Valiable/valiable.robot
+#feature
+Resource      ${CURDIR}/../keywords/web/features/ttb_feature .robot
+
+#page
+Resource      ${CURDIR}/../keywords/web/pages/ttb_page.robot
+
+#locator
+Resource      ${CURDIR}/../keywords/web/locator/ttb_locator.robot
+
+#menu
+
+#database
+
+#test_data 
+Variables     ${CURDIR}/testdata/test_data.yaml
+
+#setting
+Variables     ${CURDIR}/settings/setting.yaml
+
+#th
+Variables     ${CURDIR}/translation/th.yaml
+

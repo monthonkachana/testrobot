@@ -1,9 +1,0 @@
-[tool.robot]
-paths = ["tests"]
-pythonpath = ["libraries", "resources"]
-outputdir = "results"
-log = "log.html"
-report = "report.html"
-output = "output.xml"
-loglevel = "DEBUG"
-variable = ["ENV:QA"]
