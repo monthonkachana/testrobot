@@ -1,0 +1,7 @@
+
+app_minimal:                    resources/app-release.apk
+
+# real 
+platformVersion:                '11'
+deviceName:                     SM-G715FN/DS
+udid:                           R58R13SDA0R

@@ -1,0 +1,25 @@
+*** Variable ***
+&{ttb_locator}
+...    header_app= xpath=//android.widget.TextView[@text='Minimal']
+...    header_title= xpath=//bi[@text='Title']
+...    btn_add= xpath=//android.widget.ImageView[@resource-id='com.avjindersinghsekhon.minimaltodo:id/addToDoItemFAB']
+...    input_title= xpath=//android.widget.EditText
+...    switch_remind_me= xpath=//android.widget.Switch
+...    date= xpath=//android.widget.LinearLayout/android.widget.EditText[1]
+...    time= xpath=//android.widget.LinearLayout/android.widget.EditText[2]
+...    select_date= xpath=//android.view.View[@content-desc='{date}']
+...    btn_cancel= xpath=//android.widget.Button[@resource-id='com.avjindersinghsekhon.minimaltodo:id/cancel']
+...    btn_ok= xpath=//android.widget.Button[@resource-id='com.avjindersinghsekhon.minimaltodo:id/ok']
+...    date_today= xpath=//android.widget.EditText[@text='Today']
+...    date_format_text= xpath=//android.widget.EditText[@text='{date_format_text}']
+...    btn_next= xpath=//android.widget.ImageView[@resource-id='com.avjindersinghsekhon.minimaltodo:id/makeToDoFloatingActionButton']
+...    check_text= xpath=//android.widget.TextView[@text='{text_title}']
+...    btn_kebab= xpath=//android.widget.ImageView[@content-desc="ตัวเลือกเพิ่มเติม"]
+...    btn_settings= xpath=//android.widget.TextView[@text='Settings']
+...    btn_about= xpath=//android.widget.TextView[@text='About']
+...    btn_back= xpath=//android.widget.ImageButton[@content-desc="นำทางขึ้น"]
+...    check_text_minimal= xpath=//android.widget.TextView[@text='Minimal']
+...    check_text_version= xpath=//android.widget.TextView[@text='Version: 1.2']
+...    check_text_made_by= xpath=//android.widget.TextView[@text='Made by Avjinder']
+...    check_text_contact= xpath=//android.widget.TextView[@text='You can contact me at']
+...    check_text_email= xpath=//android.widget.TextView[@text='avisekhon@gmail.com']

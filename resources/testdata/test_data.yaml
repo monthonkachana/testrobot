@@ -1,0 +1,5 @@
+data_test:
+  date_future: "30 พฤษภาคม 2025"
+  date_past: "10 พฤษภาคม 2025"
+  date_select: "30 พ.ค., 2025"
+  text_title: "Minimal number 1"

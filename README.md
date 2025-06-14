@@ -2,8 +2,7 @@
 pip install -r requirements.txt
 
 # Run the test
-python -m robot.run -L TRACE -d results testcases/
+python -m robot.run -L TRACE -d results -v ENV:max testcases/
 
-# Run Command
-python -m robot.run -L TRACE -d results testcase/*.robot
-python -m robot.run -L TRACE -d results testcase/tc_num_01.robot
+# Run Command   * ต้องรัน real device set in \resources\settings\device_max.yaml
+python -m robot.run -L TRACE -d result -v ENV:max testcases/tc_ttb_01.robot

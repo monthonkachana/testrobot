@@ -1,0 +1,30 @@
+automation:                     UiAutomator2
+remoteUrl:                      http://127.0.0.1:4723/wd/hub
+platform:                       android
+wdaLocalPort:                   8102
+systemPort:                     8201
+appPath:                        net.appsynth.seveneleven
+appPack:                        net.appsynth.allmember.main.presentation.main.MainActivity
+appPackid_seveneleven:          net.appsynth.seveneleven:id
+appPackid_staff_app:            th.co.gosoft.storemobile.sevendelivery.staff:id
+app_open:                       'true'
+sms:                            true
+clear_cookies:                  false
+
+#####################################################################################################
+
+
+short_retry:                    6x
+order_timeout:                  605
+max_timeout:                    120
+global_timeout:                 30
+60s_timeout:                    60
+30s_timeout:                    30
+10s_timeout:                    10
+5s_timeout:                     5
+3s_timeout:                     3
+1s_timeout:                     1
+0.5s_timeout:                   0.5
+default_scroll_view:            id=android:id/content
+swipe_long_scroll:              1
+number_of_scroll:               99
