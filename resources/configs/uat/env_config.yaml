@@ -1,14 +1,4 @@
 host : https://cfr-uat.itmx.co.th/core
-db:
-    username: CFAS_UAT
-    password: 1TMXpassw0rd
-    conn_str: 10.208.1.6:1523/CFRDBSIT
-dbapp:
-    username: CFRAPP_UAT
-    password: 1TMXpassw0rd
-    conn_str: 10.208.1.6:1523/CFRDBSIT
-    
-ENVAOC: "aoc_uat"
 # host: https://cfr-dev.itmx.co.th/core
 host_jwt: https://api-ext-dev.itmx.co.th
 jwt: /jwt
@@ -22,7 +12,25 @@ Path:
     GetFileName: "/fraud-api/api/fraud-account/fraud-account-report-list"
     triggerWH: "/fraud-sftp-aoc-api/sftp/trigger/manual/receiver/warrant-h"
     WithdrawAPI: "/fraud-withdraw-mule/sftp/trigger/manual/receiver/withdraw-mule"
+db:
+    username: CFASAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBUAT
+dbapp:
+    username: CFRAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBUAT
+
+# db:
+#     username: CFASAPP
+#     password: 1TMXpassw0rd
+#     conn_str: 10.232.3.82:1522/CFRDBSIT
+# dbapp:
+#     username: CFRAPP
+#     password: 1TMXpassw0rd
+#     conn_str: 10.232.3.82:1522/CFRDBSIT
     
+ENVAOC: "aoc_uat"
 header:
 Content-Type: application/json
 X-API-Version: v1
@@ -61,6 +69,4 @@ signature:
     user: "itmxadm"
     password: "itmx123"
 namespace: "dscf-track1"
-ENVAOC: "aoc_uat"
-ENVBANK: "stp_uat"
 SECAOC: "QA_AOC"

@@ -16,6 +16,7 @@ import logging
 import python_jwt as jwt, jwcrypto.jwk as jwk, datetime
 import jwt
 from datetime import datetime, timedelta
+import openpyxl
 
 
 
@@ -117,28 +118,6 @@ def random_number_warrant(digits2):
     digits = int(digits2)
     return ''.join([str(random.randint(0,9)) for i in range(digits)])
 
-def random_number_400_600():
-    return str(random.randint(100, 999))
-
-def random_number_40_60():
-    return str(random.randint(40, 60))
-
-def random_number_4000_6000():
-    return str(random.randint(4000, 6000))
-
-# def random_number_400_600():
-#     return next(number_generator)
-def create_counter(start=400, end=600):
-    current = start
-    while True:
-        yield str(current)
-        current += 1
-        if current > end:
-            current = start
- 
-# สร้าง generator หนึ่งตัว
-number_generator = create_counter()
-
 def random_5_digits():
     return ''.join([str(random.randint(0,9)) for i in range(5)])
 
@@ -172,6 +151,9 @@ def random_minute():
         return  '0' + str(h)
     else:
         return h
+
+def random_number_100_900():
+    return str(random.randint(100, 999))
     
 def random_case_type():
     case_list = ['หลอกลวงซื้อขายสินค้า หรือบริการ', 'หลอกลวงเป็นบุคคลอื่นเพื่อยืมเงิน', 
@@ -284,15 +266,6 @@ def generate_thai_citizen_id():
     # Combine digits and checksum for display (not a real ID)
     return ''.join(digits + [str(checksum)])
 
-def generate_digit_citizen_id(num):
-    num = int(num)
-    digits = [str(random.randint(0, 9)) for _ in range(num - 1)]
-    # Compute checksum using a simple weighted sum (ปรับจากของจริง)
-    checksum = sum(int(digit) * (num - i) for i, digit in enumerate(digits)) % 11
-    checksum = (11 - checksum) % 10  # ปรับให้เป็นหลักเดียว
-
-    # Combine digits and checksum
-    return ''.join(digits) + str(checksum)
 def get_type(val):
     return type(val)
 
@@ -411,16 +384,17 @@ def covert_telno_to_format(telno):
     tel = '{0}-{1}-{2}'.format(t,e,l);
     return tel;
 
-def generate_declare_reason():
-        valid_pairs = [
-            ("01", "ชดใช้ค่าเสียหายแล้ว"),
-            ("02", "คดีสิ้นสุด"),
-            ("03", "เป็นบัญชีอื่น ที่ไม่เกี่ยวข้องกับคดี"),
-            ("99", "อื่นๆ"),
-            ("07", "ผู้เสียหายแจ้งข้อมูลผิดพลาด"),
-            ("08", "เจ้าหน้าที่บันทึกข้อมูลผิดพลาด")
-        ]
-        return random.choice(valid_pairs)  # return tuple (code, reason)
+def update_excel_cell(file_path, row, col, value):
+    row = int(row)
+    col = int(col)
+    
+    # เปิดไฟล์ Excel
+    workbook = openpyxl.load_workbook(file_path)
+    sheet = workbook.active
+    cell = sheet.cell(row=row, column=col)
+    cell.value = value
+    workbook.save(file_path)
+
 
 
 # def random_warrantID_digits(Number2):

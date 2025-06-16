@@ -3,7 +3,7 @@ Resource  ../resources/imports.robot
 
 *** Variables ***
 ${SLEEP_TIME}      15s
-${MAX_RETRIES}     20
+${MAX_RETRIES}     30
 ${RETRY_COUNT}     0
 
 
@@ -6380,6 +6380,25 @@ Get File GPG From ITMX
     set test variable   ${CSV_FILE_REQ}     ${CURDIR}/Data/${FileName_Warrant}.csv
 #     remove file     ${CURDIR}/../${FILENAME_GPG}
 #     remove file     ${CURDIR}/../${FILENAME_CSV}
+
+Get File GPG From ITMX Suspicious
+    ${Response_warrant_H_gpg}=     set variable     *.gpg
+    set test variable    ${Response_warrant_H_gpg}
+    WHILE    ${RETRY_COUNT} < ${MAX_RETRIES}
+    ${outbound_exists}=    Run Keyword And Return Status    SSHLibrary.File Should Exist   /home/sftpaoc/${ENVAOC}/cfr/suspicious/${Response_warrant_H_gpg}        
+#     Execute Command    rm -rf /home/sftpaoc/${ENVAOC}/cfr/suspicious/${Response_warrant_H_gpg}  /home/sftpaoc/${ENVAOC}/cfr/suspicious/archive/${Response_warrant_H_gpg}
+    Run Keyword If    ${RETRY_COUNT} == ${MAX_RETRIES}    Fail    "File not found after ${MAX_RETRIES} retries."
+    ${RETRY_COUNT}=    Evaluate    ${RETRY_COUNT} + 1
+    log to console   "File not found after ${RETRY_COUNT} retries."
+    Run Keyword If    ${outbound_exists}     Exit For Loop 
+        # Execute Command    rm -rf /home/sftpaoc/${ENVAOC}/cfr/suspicious/${Response_warrant_H_gpg}  /home/sftpaoc/${ENVAOC}/cfr/suspicious/archive/${Response_warrant_H_gpg}
+    END
+    Execute Command    rm -rf /home/sftpaoc/${ENVAOC}/cfr/suspicious/${Response_warrant_H_gpg}  /home/sftpaoc/${ENVAOC}/cfr/suspicious/archive/${Response_warrant_H_gpg}
+
+
+
+
+
 Get File GPG From ITMX JSON
     ${Response_warrant_H_gpg}=     set variable     ${Response_warrant_H}.gpg
     ${Response_warrant_H_csv}=     set variable     ${Response_warrant_H}.json
@@ -6482,7 +6501,7 @@ Encrypt File GPG To NITMX ${FILE_NAME_CSV}
     Log    Signature: ${signature}
     Log    Output Path: ${output_path}
 
-Encrypt File GPG To NITMX TH ${FILE_NAME_CSV}
+Encrypt TH File GPG To NITMX ${FILE_NAME_CSV}
     Private key and file path ${FILE_NAME_CSV}
     ${PRIVATE_KEY_PATH}=  Set Variable   ${PRIVATE_KEY_PATH_TO}
     ${FILEPATH}=  Set Variable  ${FILEPATH_CSV}
@@ -6494,7 +6513,7 @@ Encrypt File GPG To NITMX TH ${FILE_NAME_CSV}
     ${signature}    ${output_path}=    Set Variable    ${result}
     Log    Signature: ${signature}
     Log    Output Path: ${output_path}
-    
+
 Encrypt File GPG To NITMX JSON ${FILE_NAME_CSV}
       Set test Variable   ${PRIVATE_KEY_PATH_TO}    ${CURDIR}\\${SECAOC}.sec
       Set test Variable   ${FILEPATH_CSV}    ${CURDIR}\\Data/${FILE_NAME_CSV}.json
@@ -6516,58 +6535,33 @@ Private key and file path ${FILE_NAME_CSV}
   Set test Variable   ${FILEPATH_CSV}    ${CURDIR}\\Data/${FILE_NAME_CSV}.csv
   set test variable   ${OUT_PATH_GPG}    ${CURDIR}\\Data/${FILE_NAME_CSV}.gpg
 
-Private key and file json path ${FILE_NAME_CSV}
-  Set test Variable   ${PRIVATE_KEY_PATH_TO}    ${CURDIR}\\${SECAOC}.sec
-  Set test Variable   ${FILEPATH_CSV}    ${CURDIR}\\Data/${FILE_NAME_CSV}.json
-  set test variable   ${OUT_PATH_GPG}    ${CURDIR}\\Data/${FILE_NAME_CSV}.gpg
-
 get current datetime
     ${date}=    Get Current Date
     ${year}=    Convert Date    ${date}    result_format=%Y
     ${month_day}=    Convert Date    ${date}    result_format=%m%d
-    ${month}=    Convert Date    ${date}    result_format=%m
-    ${day}=    Convert Date    ${date}    result_format=%d
-
-    ${future_date}=    Add Time To Date    ${date}    1 day
-    ${future_date_month}=    Add Time To Date    ${date}    31 day
-    ${future_day}=    Convert Date    ${future_date}    result_format=%d
-    ${future_month}=    Convert Date    ${future_date_month}    result_format=%m
     ${thai_year}=     evaluate   ${year}+${543}
-    ${thai_year_future}=     evaluate   ${year}+${544}
     ${filenameDateTime}=    set variable    ${thai_year}${month_day}
-    ${filenameDateTime_eng}=    set variable    ${year}${month_day}
-    ${filenameDateTime_eng_v1}=    set variable    ${year}-${month}-${day}
-    ${filenameDateTime_day_future}=    set variable    ${thai_year}${month}${future_day}
-    ${filenameDateTime_year_future}=    set variable    ${thai_year_future}${month}${future_day}
-    ${filenameDateTime_month_future}=    set variable    ${year}-${future_month}-${day}
-    ${filenameDateTime_month_future_v1}=    set variable    ${year}${future_month}${day}
 #     log    ${datetime}
     set test variable    ${filenameDateTime} 
-    set test variable    ${filenameDateTime_eng} 
-    set test variable    ${filenameDateTime_day_future}  
-    set test variable    ${filenameDateTime_month_future}  
-    set test variable    ${filenameDateTime_month_future_v1}  
-    set test variable    ${filenameDateTime_year_future}  
-    set test variable    ${filenameDateTime_eng_v1}  
+
+
+get current datetime money trail
+    ${date}=    Get Current Date
+    ${filenameDateTime}=    Convert Date    ${date}    result_format=%Y%m%d%H%M%S%f
+    ${final_datetime}=        Set Variable    ${filenameDateTime[:17]}   # เลือกแค่ 3 ตัวสุดท้ายเป็นมิลลิวินาท
+    
+#     log to console   ${filenameDateTime}
+    log to console   ${final_datetime}
+    set test variable    ${filenameDateTime}    ${final_datetime}
 
 
 get current date WarrantH
     ${date}=    Get Current Date
     ${year}=    Convert Date    ${date}    result_format=%Y
-    ${month}=    Convert Date    ${date}    result_format=%m
-    ${day}=    Convert Date    ${date}    result_format=%d
     ${month_day}=    Convert Date    ${date}    result_format=%m-%d
     ${thai_year}=     evaluate   ${year}+${543}
     ${datetime}=    set variable    ${thai_year}-${month_day}
-    ${datetime_eng}=    set variable    ${year}-${month_day}
-    ${datetime_eng_1}=    set variable    ${year}-${month}-32
-    ${datetime_eng_2}=    set variable    ${year}-13-${day}
-    ${datetime_eng_3}=    set variable    ${year}-${month}-TS
     set test variable    ${Date_WarrantH}    ${datetime} 
-    set test variable    ${Date_Eng}    ${datetime_eng} 
-    set test variable    ${Date_Eng_fix1}    ${datetime_eng_1} 
-    set test variable    ${Date_Eng_fix2}    ${datetime_eng_2} 
-    set test variable    ${Date_Eng_fix3}    ${datetime_eng_3} 
 
 get current TIME
     ${date}=    Get Current Date
@@ -6578,3 +6572,6 @@ get current TIME WarrantH
     ${date}=    Get Current Date
     ${datetime}=    Convert Date    ${date}    result_format=%H:%M
     set test variable    ${TIME}    ${datetime}
+
+
+# select * from AOC_SFTP_WARRANT_REQUEST_FILE_DETAILwhere FILE_ID = '0260e505-d45e-44cb-b206-3299803d4cb6';select * from AOC_SFTP_WARRANT_REQUEST_FILE_INFO;where FILE_NAME = 'CFR_Warrant_H_25671113_1600_999_REQ';select * from AOC_SFTP_WARRANT_RESPONSE_FILE_INFOwhere REQUEST_FILE_ID = '0260e505-d45e-44cb-b206-3299803d4cb6'

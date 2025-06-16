@@ -16,7 +16,7 @@ TC002_001
     THEN Check DB master case Negative case to None Warrant_ID
     THEN Check DB REQ and RES File To Deleted
 
-TC002_002 
+TC002_002
     Given create File Name Warrant H and รอบแรก TIME
     WHEN Prepara Data Request CSV is 1 Negatives Test Case warrant_id is | not have 3
     WHEN Encrypt File GPG To NITMX ${FileName_Warrant}

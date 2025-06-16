@@ -3,6 +3,8 @@ Resource  ../resources/imports.robot
 Library    Collections
 Library    Process
 
+*** Variables ***
+${BANK_CASE_ALL}     ${mastercase}  
 
 *** Keywords ***
 ดึงข้อมูลของบุคคลเคยออกรายงานมาก่อนหน้าของเงื่อนไขที่ ${CONDITION_ID} ได้แก่ '${BANK_LIST}'
@@ -131,6 +133,11 @@ connect to cfr database
 connect to cfr database horse
     [Documentation]    เก็บแบงค์
     ${db_connect}    connect    ${dbapp.username}    ${dbapp.password}    ${dbapp.conn_str}
+    set test variable    ${db_connect}
+
+connect to cfr database horse uat
+    [Documentation]    เก็บแบงค์
+    ${db_connect}    connect    ${dbuat.username}    ${dbuat.password}    ${dbuat.conn_str}
     set test variable    ${db_connect}
 
 get gray list from database with bank '${BANK_NAME}' and conditon no '${RULE_ID}' account type '${ACC_TYPE}' ยกเว้นเงื่อนไข '${NO_CONDITION}'
@@ -539,7 +546,8 @@ Check DB warrant H
         connect to cfr database horse
         log  ${BANK_CASE_ID}
         ${result}=    Get Length     ${BANK_CASE_ID}
-        FOR  ${index}    IN RANGE     ${result}    
+        FOR  ${index}    IN RANGE     ${result}   
+        BuiltIn.Sleep   0.5s 
         ${data_total}=    Get From List   ${BANK_CASE_ID}    ${index}
         ${data_responcode}=    Get From List   ${data_total}    0
         ${split_data}=    Split String    ${data_responcode}    ;
@@ -704,20 +712,21 @@ get Account number ${Account} And Bank Code ${ฺBC} Unfreeze ${type}
     END
 
 
-Get Data Police Case Number is null ${row_number}
+Get Data Police Case ${BANKCODE} Number is null ${row_number} and ${personal_type}
     # ${REQ_data_list_to_check}   create list
     ${BANK_CASE_ID}   create list
     # set test variable    ${REQ_data_list_to_check}
     set test variable    ${BANK_CASE_ID}
         connect to cfr database horse
        ${sql}=   catenate      select distinct FC.MASTER_CASE_ID,POLICE_CASE_NUMBER,SUB_CASE_RANK 
-       ...   from CFRAPP.FRAUDCASE FC
+       ...   from FRAUDCASE FC
     ...    JOIN  BANKFRAUDCASE  BFC on FC.MASTER_CASE_ID = BFC.MASTER_CASE_ID join BANKACCOUNT BA on BFC.ACCOUNT_ID = BA.ID
     ...    join PERSON PS on BA.PERSON_ID = PS.ID
     ...    where POLICE_CASE_NUMBER is null and PS.PERSONAL_ID is not null and BFC.SUB_CASE_POLICE_BLOCK_NUMBER is null
-    ...    and BFC.SUB_CASE_POLICE_BLOCK_TYPE is null and BFC.SUB_CASE_RANK = 2
+    ...    and BFC.SUB_CASE_POLICE_BLOCK_TYPE is null and BFC.SUB_CASE_RANK = 2  and BA.BANK_CODE = '${BANKCODE}' and PS.PERSONAL_TYPE = '${personal_type}'
     ...    and CASE_TYPE_ID not in (1) and BA.PROMPTPAY_TYPE not in ('e-wallet') 
-    ...    and FC.MASTER_CASE_ID not like ('%SUS%') and FC.MASTER_CASE_ID not like ('%BAS%') and FC.MASTER_CASE_ID not like ('%BOA%') and FC.MASTER_CASE_ID not like ('%KBANK%') and FC.MASTER_CASE_ID not like ('%KBANK%') and FC.MASTER_CASE_ID NOT LIKE ('%KBNK%') AND FC.MASTER_CASE_ID NOT LIKE ('%VALID%') AND FC.MASTER_CASE_ID NOT LIKE ('%KKP%')  fetch first ${row_number} rows only
+    ...    and FC.MASTER_CASE_ID not like ('%SUS%') and FC.MASTER_CASE_ID not like ('%BAS%') and FC.MASTER_CASE_ID not like ('%BOA%') and FC.MASTER_CASE_ID not like ('%KBANK%') and FC.MASTER_CASE_ID not like ('%KBANK%') and FC.MASTER_CASE_ID NOT LIKE ('%KBNK%') AND FC.MASTER_CASE_ID NOT LIKE ('%VALID%')  
+    ...    fetch first ${row_number} rows only
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${LEN_GENFILE}=  Get Length    ${query}
         FOR    ${index}    IN RANGE    ${LEN_GENFILE}
@@ -734,10 +743,90 @@ Get Data Police Case Number is null ${row_number}
         END
 
 
+
+
+Get Data Master case id ${row_number} and end row ${END_row_number} 
+        # connect to cfr database horse
+        connect to cfr database
+       ${sql}=   catenate        select MASTER_CASE_ID from CFRAPP.FRAUDCASE FC
+        ...    LEFT JOIN AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL DETAIL on FC.MASTER_CASE_ID = DETAIL.BANK_CASE_ID
+        ...    where DETAIL.BANK_CASE_ID is null ORDER BY MASTER_CASE_ID
+        ...    OFFSET ${row_number} ROWS FETCH NEXT ${END_row_number} ROWS ONLY
+        ${query}=   query_all     ${db_connect}     ${sql}     # query
+        ${LEN_GENFILE}=  Get Length    ${query}
+        FOR    ${index}    IN RANGE    ${LEN_GENFILE}
+        ${result}=   set variable    ${query[${index}]}
+        ${MASTER_CASE_ID}=    set variable    ${result}[MASTER_CASE_ID]
+        set test variable   ${MASTER_CASE_ID}
+        Create Data add Money trail
+          log   ${index}
+        END
+
+Get Data PoliceCaseNumber is null ${row_number} and ${mastercase}
+        ${case_list}=  Split String  ${BANK_CASE_ALL}  ,
+        ${LEN_DATA}=    Get Length    ${case_list}
+        Log To Console   ${LEN_DATA}
+        FOR  ${index}    IN RANGE     ${LEN_DATA} 
+            ${BANK_CASE_ID}=    Set Variable   ${case_list[${index}]}
+            Set Test Variable    ${BANK_CASE_ID}
+        connect to cfr database horse
+       ${sql}=   catenate      select distinct FC.MASTER_CASE_ID,POLICE_CASE_NUMBER,SUB_CASE_RANK 
+       ...   from FRAUDCASE FC
+    ...    JOIN  BANKFRAUDCASE  BFC on FC.MASTER_CASE_ID = BFC.MASTER_CASE_ID join BANKACCOUNT BA on BFC.ACCOUNT_ID = BA.ID
+    ...    join PERSON PS on BA.PERSON_ID = PS.ID
+    ...    where POLICE_CASE_NUMBER is null and PS.PERSONAL_ID is not null and BFC.SUB_CASE_POLICE_BLOCK_NUMBER is null
+    ...    and BFC.SUB_CASE_POLICE_BLOCK_TYPE is null and BFC.SUB_CASE_RANK = 2
+    ...    and CASE_TYPE_ID not in (1) and BA.PROMPTPAY_TYPE not in ('e-wallet') 
+    ...    AND FC.MASTER_CASE_ID = '${BANK_CASE_ID}'  
+    # ...    AND FC.MASTER_CASE_ID in (${mastercase})  
+        ${query}=   query_all     ${db_connect}     ${sql}     # query
+        ${LEN_GENFILE}=  Get Length    ${query}
+        FOR    ${index}    IN RANGE    ${LEN_GENFILE}
+        ${result}=   set variable    ${query[${index}]}
+        ${MASTER_CASE_ID}=    set variable    ${result}[MASTER_CASE_ID]
+        set test variable   ${MASTER_CASE_ID}
+        get current date WarrantH
+        get current TIME WarrantH
+        Genarate warrantID random 'SFTP'
+        Create Data add Warrant H
+        List data file REQ
+        Get Data account and log ${MASTER_CASE_ID}
+          log   ${index}
+        END
+        END
+
+SP Get Data PoliceCaseNumber is null ${row_number} and ${mastercase}
+        ${case_list}=  Split String  ${BANK_CASE_ALL}  ,
+        ${LEN_DATA}=    Get Length    ${case_list}
+        Log To Console   ${LEN_DATA}
+        FOR  ${index}    IN RANGE     ${LEN_DATA} 
+            ${BANK_CASE_ID}=    Set Variable   ${case_list[${index}]}
+            Set Test Variable    ${BANK_CASE_ID}
+        connect to cfr database horse
+       ${sql}=   catenate      select distinct FC.MASTER_CASE_ID,POLICE_CASE_NUMBER 
+       ...   from FRAUDCASE FC where FC.MASTER_CASE_ID = '${BANK_CASE_ID}'  
+    # ...    AND FC.MASTER_CASE_ID in (${mastercase})  
+        ${query}=   query_all     ${db_connect}     ${sql}     # query
+        ${LEN_GENFILE}=  Get Length    ${query}
+        FOR    ${index}    IN RANGE    ${LEN_GENFILE}
+        ${result}=   set variable    ${query[${index}]}
+        ${MASTER_CASE_ID}=    set variable    ${result}[MASTER_CASE_ID]
+        set test variable   ${MASTER_CASE_ID}
+        get current date WarrantH
+        get current TIME WarrantH
+        Genarate warrantID random 'SFTP'
+        Create Data add Warrant H
+        List data file REQ
+        Get Data account and log ${MASTER_CASE_ID}
+          log   ${index}
+        END
+        END
+
+
 Get Data account and log ${MASTER_CASE_ID}
         connect to cfr database horse
        ${sql}=   catenate      select distinct FC.MASTER_CASE_ID,POLICE_CASE_NUMBER,ACCOUNT_NUMBER,BANK_CODE,ps.PERSONAL_ID,SUB_CASE_RANK 
-       ...   from CFRAPP.FRAUDCASE FC
+       ...   from FRAUDCASE FC
     ...    JOIN  BANKFRAUDCASE  BFC on FC.MASTER_CASE_ID = BFC.MASTER_CASE_ID join BANKACCOUNT BA on BFC.ACCOUNT_ID = BA.ID
     ...    join PERSON PS on BA.PERSON_ID = PS.ID
     ...    where POLICE_CASE_NUMBER is null and PS.PERSONAL_ID is not null and BFC.SUB_CASE_POLICE_BLOCK_NUMBER is null

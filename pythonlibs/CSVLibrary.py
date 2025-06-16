@@ -21,6 +21,24 @@ class CSVLibrary(object):
         f.truncate()
         f.close()
 
+    # def append_to_csv_file(self, filename, data):
+    # # กรองข้อมูลที่ว่าง
+    #  filtered_data = [row for row in data if row.strip()]  # ลบข้อมูลที่เป็นช่องว่าง
+    # with open(filename, 'a', newline='') as f:
+    #     csvfile = csv.writer(f)
+    #     for row in filtered_data:
+    #         csvfile.writerow([row])  # เขียนแค่แถวที่มีข้อมูล
+
+    def append_to_csv_file(self, filename, data):
+        # เปิดไฟล์ในโหมด append
+        with open(filename, 'a', newline='') as f:
+         csvfile = csv.writer(f)
+         csvfile.writerow(data)  # เขียนแถวใหม่ลงในไฟล์ CSV
+        # f = open(filename, 'a')
+        # csvfile = csv.writer(f)
+        # csvfile.writerow(data)
+        # f.close()
+
     def append_to_csv_file1(self, filename, data):
         '''This keyword will append data to a new or existing CSV file.
         Data should be iterable (e.g. list or tuple)
@@ -28,7 +46,7 @@ class CSVLibrary(object):
 
         f = open(filename, 'a')
         csvfile = csv.writer(f)
-        # csvfile.writerow([data])
-        for item in data:
-            csvfile.writerow([item])
+        csvfile.writerow(data)
+        # for item in data:
+        #     csvfile.writerow([item])
         f.close()

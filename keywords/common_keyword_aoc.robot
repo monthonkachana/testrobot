@@ -35,19 +35,12 @@ Prepare Data TEST And create file Json
     set test variable    ${REQ_data_list_to_check}
     set test variable    ${BANK_CASE_ID}
         connect to cfr database
-       ${sql}=   catenate     SELECT DISTINCT data.PERSONAL_ID, data.ACCOUNT_NUMBER, REF_CODE, STATUS, FA.FIRST_NAME, FA.LAST_NAME
-...    FROM (SELECT PERSONAL_ID, ACCOUNT_NUMBER, BANK_CODE, MAX(RULE_MAXX) AS RULE_MAX
-...          FROM (SELECT FA.PERSONAL_ID, FA.ACCOUNT_NUMBER, BANK_CODE, MIN(RULE_ID) AS RULE_MAXX
-...                FROM FRAUD_PERSON FP
-...                         JOIN FRAUD_ACCOUNT FA ON FP.PERSONAL_ID = FA.PERSONAL_ID
-...                         JOIN FRAUD_ACCOUNT_APPLY_FRAUD_RULE FAAFR ON FA.ID = FAAFR.ACCOUNT_ID
-...                WHERE FP.FRAUD_LEVEL = '2'
-...                  AND FA.IS_ACTIVE = '1'
-...                GROUP BY ACCOUNT_NUMBER, FA.PERSONAL_ID, BANK_CODE)
-...          WHERE RULE_MAXX IN (1, 2)
-...          GROUP BY PERSONAL_ID, ACCOUNT_NUMBER, BANK_CODE) data
-...             JOIN FRAUD_REF_CODE_MULE MULE ON data.PERSONAL_ID = MULE.PERSONAL_ID and MULE.STATUS = 1
-...             JOIN FRAUD_ACCOUNT FA ON data.PERSONAL_ID = FA.PERSONAL_ID FETCH FIRST 1 ROWS ONLY
+       ${sql}=   catenate      SELECT DISTINCT MULE.REF_CODE, MAP.PERSONAL_ID, FA.FIRST_NAME, FA.LAST_NAME, FA.BANK_CODE, FA.ACCOUNT_NUMBER
+...    FROM FRAUD_REF_CODE_MAPPING MAP
+...             INNER JOIN FRAUD_REF_CODE_MULE MULE ON MAP.REF_CODE_ID = MULE.REF_CODE_ID
+...             INNER JOIN FRAUD_ACCOUNT_REPORT FAR ON MAP.PERSONAL_ID = FAR.PERSONAL_ID
+...             INNER JOIN FRAUD_ACCOUNT FA ON FAR.ACCOUNT_ID = FA.ID
+...    WHERE MAP.FRAUD_LEVEL = 2 fetch first 1 rows only
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${LEN_GENFILE}=  Get Length    ${query}
         FOR    ${index}    IN RANGE    ${LEN_GENFILE}
@@ -72,93 +65,7 @@ Prepare Data TEST And create file Json
         Replace string to create file
           log   ${index}
         END
-Prepare Data TEST And create file Json Person_ID 35 digis
-    ${REQ_data_list_to_check}   Create List
-    ${BANK_CASE_ID}   Create List
-    Set Test Variable    ${REQ_data_list_to_check}
-    Set Test Variable    ${BANK_CASE_ID}
-    Connect To CFR Database
-    ${sql}=   Catenate    SELECT DISTINCT data.PERSONAL_ID, data.ACCOUNT_NUMBER, REF_CODE, STATUS, FA.FIRST_NAME, FA.LAST_NAME 
-    ...    FROM (SELECT PERSONAL_ID, ACCOUNT_NUMBER, BANK_CODE, MAX(RULE_MAXX) AS RULE_MAX 
-    ...          FROM (SELECT FA.PERSONAL_ID, FA.ACCOUNT_NUMBER, BANK_CODE, MIN(RULE_ID) AS RULE_MAXX 
-    ...                FROM FRAUD_PERSON FP 
-    ...                JOIN FRAUD_ACCOUNT FA ON FP.PERSONAL_ID = FA.PERSONAL_ID 
-    ...                JOIN FRAUD_ACCOUNT_APPLY_FRAUD_RULE FAAFR ON FA.ID = FAAFR.ACCOUNT_ID 
-    ...                AND FA.ACCOUNT_TYPE = 'ชาวต่างชาติ'
-    ...                GROUP BY ACCOUNT_NUMBER, FA.PERSONAL_ID, BANK_CODE) 
-    ...          WHERE RULE_MAXX IN (1) 
-    ...          GROUP BY PERSONAL_ID, ACCOUNT_NUMBER, BANK_CODE) data 
-    ...    JOIN FRAUD_REF_CODE_MULE MULE ON data.PERSONAL_ID = MULE.PERSONAL_ID 
-    ...    JOIN FRAUD_ACCOUNT FA ON data.PERSONAL_ID = FA.PERSONAL_ID FETCH FIRST 1 ROWS ONLY
-    ${query}=   Query All     ${db_connect}     ${sql}     # query
-    ${LEN_GENFILE}=  Get Length    ${query}
-    FOR    ${index}    IN RANGE    ${LEN_GENFILE}
-        ${result}=   Set Variable    ${query[${index}]}
-        ${REF_CODE}=    Set Variable    ${result}[REF_CODE]
-        ${FIRST_NAME}=    Set Variable    ${result}[FIRST_NAME]
-        ${LAST_NAME}=    Set Variable    ${result}[LAST_NAME]
-        ${PERSONAL_ID}=    Set Variable    ${result}[PERSONAL_ID]
-        ${PERSONAL_ID}=    decrypt cfr string '${PERSONAL_ID}'
-        ${FIRST_NAME}=    decrypt cfr string '${FIRST_NAME}'
-        ${LAST_NAME}=    decrypt cfr string '${LAST_NAME}'
-            Set Test Variable    ${FIRST_NAME}
-            Set Test Variable    ${LAST_NAME}
-            Set Test Variable    ${REF_CODE}
-        ${PERSONAL_ID_LENGTH}=   Get Length    ${PERSONAL_ID}
-        IF    ${PERSONAL_ID_LENGTH} == 35
-            Log    PERSONAL_ID is valid with length: ${PERSONAL_ID_LENGTH}
-            Set Test Variable    ${PERSONAL_ID}
-        ELSE
-            Log    PERSONAL_ID is invalid with length: ${PERSONAL_ID_LENGTH}
-        END
-            set test variable   ${personal_id}    ${PERSONAL_ID}
-            set test variable   ${first_name}    ${FIRST_NAME}
-            set test variable   ${last_name}    ${LAST_NAME}
-            set test variable   ${ref_code}    ${REF_CODE}
-            warrantDate 'Local'
-            Prepare Json From to Registry
-            Replace string to create file
-            log   ${index}
-    END
-Prepare Data TEST And create file ${number} Json original
-    ${REQ_data_list_to_check}   create list
-    ${BANK_CASE_ID}   create list
-    set test variable    ${REQ_data_list_to_check}
-    set test variable    ${BANK_CASE_ID}
-        connect to cfr database
-       ${sql}=   catenate     SELECT DISTINCT data.PERSONAL_ID, data.ACCOUNT_NUMBER, REF_CODE, STATUS, FA.FIRST_NAME, FA.LAST_NAME 
-...    FROM (SELECT PERSONAL_ID, ACCOUNT_NUMBER, BANK_CODE, MAX(RULE_MAXX) AS RULE_MAX 
-...          FROM (SELECT FA.PERSONAL_ID, FA.ACCOUNT_NUMBER, BANK_CODE, MIN(RULE_ID) AS RULE_MAXX 
-...                FROM FRAUD_PERSON FP 
-...                JOIN FRAUD_ACCOUNT FA ON FP.PERSONAL_ID = FA.PERSONAL_ID 
-...                JOIN FRAUD_ACCOUNT_APPLY_FRAUD_RULE FAAFR ON FA.ID = FAAFR.ACCOUNT_ID 
-...                WHERE FP.FRAUD_LEVEL = '2' AND FA.IS_ACTIVE = '1' 
-...                GROUP BY ACCOUNT_NUMBER, FA.PERSONAL_ID, BANK_CODE) 
-...          WHERE RULE_MAXX = '3' 
-...          GROUP BY PERSONAL_ID, ACCOUNT_NUMBER, BANK_CODE) data 
-...    JOIN FRAUD_REF_CODE_MULE MULE ON data.PERSONAL_ID = MULE.PERSONAL_ID 
-...    JOIN FRAUD_ACCOUNT FA ON data.PERSONAL_ID = FA.PERSONAL_ID FETCH FIRST ${number} ROWS ONLY
-        ${query}=   query_all     ${db_connect}     ${sql}     # query
-        ${LEN_GENFILE}=  Get Length    ${query}
-        FOR    ${index}    IN RANGE    ${LEN_GENFILE}
-        ${result}=   set variable    ${query[${index}]}
-        ${REF_CODE}=    set variable    ${result}[REF_CODE]
-        ${FIRST_NAME}=    set variable    ${result}[FIRST_NAME]
-        ${LAST_NAME}=    set variable    ${result}[LAST_NAME]
-        ${PERSONAL_ID}=    set variable    ${result}[PERSONAL_ID]
-        ${PERSONAL_ID}=    decrypt cfr string '${PERSONAL_ID}'
-        ${FIRST_NAME}=    decrypt cfr string '${FIRST_NAME}'
-        ${LAST_NAME}=    decrypt cfr string '${LAST_NAME}'
-        Set Test Variable    ${PERSONAL_ID}
-        Set Test Variable    ${FIRST_NAME}
-        Set Test Variable    ${LAST_NAME}
-        Set Test Variable    ${REF_CODE}
-        set test variable   ${personal_id}    ${PERSONAL_ID}
-        set test variable   ${first_name}    ${FIRST_NAME}
-        set test variable   ${last_name}    ${LAST_NAME}
-        set test variable   ${ref_code}    ${REF_CODE}
-        warrantDate 'Local'
-        END
+
 
 
 Prepare Data TEST submit-police-case negative ${BankCaseID} and warrantID ${H}
@@ -391,48 +298,23 @@ Prepare Json From to submit
     ...    }
     Set Test Variable  ${json_string}
      ${encoded_data}=   Encode String To Bytes    ${json_string}    encoding=UTF-8
-     Set Test Variable     ${encoded_data}
+     Set Test Variable     ${json_string}         ${encoded_data}
      Set Test Variable     ${bankcaseid}
      Set Test Variable     ${warrant_id}
      Set Test Variable     ${warrant_date}
      Set Test Variable     ${warrant_time}
      Set Test Variable     ${warrant_date_Time}         ${warrant_date} ${warrant_time}:00
 
-Replace string to create file 
+Replace string to create file
     ${json_string}=    JSONLibrary.Convert Json To String    ${json_string}
     ${decoded_data}=    String.Decode Bytes To String    ${encoded_data}    encoding=UTF-8
     ${cleaned_data}=    String.Replace String    ${decoded_data}    \\n    ${EMPTY}
     ${cleaned_data}=    String.Replace String    ${cleaned_data}    \\"    "
     ${cleaned_data}=    String.Replace String    ${cleaned_data}    "{    {
     ${cleaned_data}=    String.Replace String    ${cleaned_data}    }"    }
-    set test variable    ${cleaned_data}
     Create File    ${CURDIR}/Data/${directory}.json    ${cleaned_data}
     Append To List         ${REQ_data_list_to_check}       ${cleaned_data}
     set test variable    ${REQ_data_list_to_check}
-Replace string to create file and fix file name is ${JSON}
-    ${json_string}=    JSONLibrary.Convert Json To String    ${json_string}
-    ${decoded_data}=    String.Decode Bytes To String    ${encoded_data}    encoding=UTF-8
-    ${cleaned_data}=    String.Replace String    ${decoded_data}    \\n    ${EMPTY}
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    \\"    "
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    "{    {
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    }"    }
-    Create File    ${CURDIR}/Data/${directory}.${JSON}    ${cleaned_data}
-    Append To List         ${REQ_data_list_to_check}       ${cleaned_data}
-    set test variable    ${REQ_data_list_to_check}
-Replace string to create file for Generate JSON Loop
-    ${json_string}=    JSONLibrary.Convert Json To String    ${json_string}
-    ${decoded_data}=    String.Decode Bytes To String    ${encoded_data}    encoding=UTF-8
-    ${cleaned_data}=    String.Replace String    ${decoded_data}    \\n    ${EMPTY}
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    \\"    "
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    "{    {
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    }"    }
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    "[    [
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    ]",    ],
-    ${cleaned_data}=    String.Replace String    ${cleaned_data}    ]"     ] 
-    Create File    ${CURDIR}/Data/${directory}.json    ${cleaned_data}
-    # Log    ${cleaned_data}    DEBUG
-    # Append To List         ${REQ_data_list_to_check}       ${cleaned_data}
-    # set test variable    ${REQ_data_list_to_check}
 Prepare Json From to submit not bankcaseid
     [Documentation]    Test Case SUBMIT
     ${json_string}=  Catenate    SEPARATOR=\n

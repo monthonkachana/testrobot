@@ -347,6 +347,38 @@ Get Data Police Case Number is null ${row_number} Add mastercase is ${mastercase
         # Get Data account and log ${MASTER_CASE_ID}
           log   ${index}
         END
+
+
+Get Data Police Case Number is null ${row_number}
+    # ${REQ_data_list_to_check}   create list
+    ${BANK_CASE_ID}   create list
+    # set test variable    ${REQ_data_list_to_check}
+    set test variable    ${BANK_CASE_ID}
+        connect to cfr database horse
+       ${sql}=   catenate      select distinct FC.MASTER_CASE_ID,POLICE_CASE_NUMBER,SUB_CASE_RANK
+       ...   from CFRAPP.FRAUDCASE FC
+    ...    JOIN  BANKFRAUDCASE  BFC on FC.MASTER_CASE_ID = BFC.MASTER_CASE_ID join BANKACCOUNT BA on BFC.ACCOUNT_ID = BA.ID
+    ...    join PERSON PS on BA.PERSON_ID = PS.ID
+    ...    where POLICE_CASE_NUMBER is null and PS.PERSONAL_ID is not null and BFC.SUB_CASE_POLICE_BLOCK_NUMBER is null
+    ...    and BFC.SUB_CASE_POLICE_BLOCK_TYPE is null and BFC.SUB_CASE_RANK = 2
+    ...    and CASE_TYPE_ID not in (1) and BA.PROMPTPAY_TYPE not in ('e-wallet')
+    ...    and FC.MASTER_CASE_ID not like ('%SUS%') and FC.MASTER_CASE_ID not like ('%BAS%') and FC.MASTER_CASE_ID not like ('%BOA%') and FC.MASTER_CASE_ID not like ('%KBANK%') 
+    ...    and FC.MASTER_CASE_ID not like ('%KBANK%') and FC.MASTER_CASE_ID NOT LIKE ('%KBNK%') AND FC.MASTER_CASE_ID NOT LIKE ('%VALID%') AND FC.MASTER_CASE_ID NOT LIKE ('%KKP%')  fetch first ${row_number} rows only
+        ${query}=   query_all     ${db_connect}     ${sql}     # query
+        ${LEN_GENFILE}=  Get Length    ${query}
+        FOR    ${index}    IN RANGE    ${LEN_GENFILE}
+        ${result}=   set variable    ${query[${index}]}
+        ${MASTER_CASE_ID}=    set variable    ${result}[MASTER_CASE_ID]
+        set test variable   ${MASTER_CASE_ID}
+        get current date WarrantH
+        get current TIME WarrantH
+        Genarate warrantID random 'SFTP'
+        Create Data add Warrant H
+        List data file REQ
+        # Get Data account and log ${MASTER_CASE_ID}
+          log   ${index}
+        END
+
 Get Data Query Police Case Number is ${row_number}
     # ${REQ_data_list_to_check}   create list
     ${BANK_CASE_ID}   create list
@@ -432,7 +464,7 @@ Check DB master case Negative case
         ${Warrant_id_req}=        Get From List    ${split_data}    1
         set test variable      ${Bank_case_id_req}
         set test variable      ${Warrant_id_req}
-       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}' AND WARRANT_ID = '${Warrant_id_req}'
+       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM CFAS_SIT.AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}' AND WARRANT_ID = '${Warrant_id_req}'
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${result}=   set variable    ${query[0]}
         ${BANK_CASE_ID}=    set variable    ${result}[BANK_CASE_ID]
@@ -472,7 +504,7 @@ Check DB master case Negative case to None BankcaseID
         ${Warrant_id_req}=        Get From List    ${split_data}    1
         set test variable      ${Bank_case_id_req}
         set test variable      ${Warrant_id_req}
-       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE WARRANT_ID = '${Warrant_id_req}'
+       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM CFAS_SIT.AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE WARRANT_ID = '${Warrant_id_req}'
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${result}=   set variable    ${query[0]}
         ${BANK_CASE_ID}=    set variable    ${result}[BANK_CASE_ID]
@@ -500,7 +532,7 @@ Check DB master case Negative case to None Warrant_ID
         ${Warrant_id_req}=        Get From List    ${split_data}    1
         set test variable      ${Bank_case_id_req}
         set test variable      ${Warrant_id_req}
-       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}'
+       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM CFAS_SIT.AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}'
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${result}=   set variable    ${query[0]}
         ${BANK_CASE_ID}=    set variable    ${result}[BANK_CASE_ID]
@@ -528,7 +560,7 @@ Check DB master case Negative case warrant_type to change
         ${Warrant_id_req}=        Get From List    ${split_data}    1
         set test variable      ${Bank_case_id_req}
         set test variable      ${Warrant_id_req}
-       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}' AND WARRANT_ID = '${Warrant_id_req}'
+       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM CFAS_SIT.AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}' AND WARRANT_ID = '${Warrant_id_req}'
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${result}=   set variable    ${query[0]}
         ${BANK_CASE_ID}=    set variable    ${result}[BANK_CASE_ID]
@@ -557,7 +589,7 @@ Check DB master case Negative case warrant_type to change is None
         ${Warrant_id_req}=        Get From List    ${split_data}    1
         set test variable      ${Bank_case_id_req}
         set test variable      ${Warrant_id_req}
-       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}' AND WARRANT_ID = '${Warrant_id_req}'
+       ${sql}=   catenate      select BANK_CASE_ID, WARRANT_ID, WARRANT_TYPE, STATUS_CODE, STATUS_DETAIL FROM CFAS_SIT.AOC_SFTP_WARRANT_REQUEST_FILE_DETAIL WHERE BANK_CASE_ID = '${Bank_case_id_req}' AND WARRANT_ID = '${Warrant_id_req}'
         ${query}=   query_all     ${db_connect}     ${sql}     # query
         ${result}=   set variable    ${query[0]}
         ${BANK_CASE_ID}=    set variable    ${result}[BANK_CASE_ID]
@@ -799,7 +831,7 @@ Check DB master case File name RES
         log     ${index}
         END
 Check DB REQ and RES File To Deleted 
-        BuiltIn.Sleep   5s
+        BuiltIn.Sleep   10s
         connect to cfr database
        ${sql}=   catenate      SELECT * FROM AOC_SFTP_WARRANT_REQUEST_FILE_INFO  WHERE FILE_NAME = '${FileName_Warrant}.gpg'
         ${query}=   query_all     ${db_connect}     ${sql}     # query
@@ -858,17 +890,19 @@ Get File GPG From ITMX For Duplicate
     set test variable   ${GPG_FILE_REQ}     ${CURDIR}/Data/${FileName_Warrant}.gpg
     set test variable   ${CSV_FILE_REQ}     ${CURDIR}/Data/${FileName_Warrant}.csv
 Remove file SSH 
-    Close All Connections
-    login to sftp server and Put file by AOC_SC
+    Open Connection     ${hostsftp.ip}
+    # Login	${AOC.user}   ${AOC.password}
+    Login	${bank_999.user}   ${bank_999.password}
     Sleep    2s
     SSHLibrary.File Should Exist   /home/sftpaoc/${ENVAOC}/cfr/warranth_binding/outbound/${Response_warrant_H_gpg}
     SSHLibrary.File Should Exist   /home/sftpaoc/${ENVAOC}/cfr/warranth_binding/inbound/archive/${FileName_Warrant}.gpg
     ${outbound}=    Execute Command    rm /home/sftpaoc/${ENVAOC}/cfr/warranth_binding/outbound/${Response_warrant_H_gpg}    forward_agent=True
     ${inbound_archive}=    Execute Command    rm /home/sftpaoc/${ENVAOC}/cfr/warranth_binding/inbound/archive/${FileName_Warrant}.gpg
     Close All Connections
-Remove file Json WithDraw SSH 
-    Close All Connections
-    login to sftp server and Put file by AOC_SC
+Remove file Json WithDraw SSH
+    Open Connection     ${hostsftp.ip}
+    # Login	${AOC.user}   ${AOC.password}
+    Login	${bank_999.user}   ${bank_999.password}
     Sleep    2s
     SSHLibrary.File Should Exist   /home/sftpaoc/${ENVAOC}/cfr/withdraw_mule/outbound/${Response_warrant_H_gpg}
     SSHLibrary.File Should Exist   /home/sftpaoc/${ENVAOC}/cfr/withdraw_mule/inbound/archive/${FileName_Warrant}.gpg

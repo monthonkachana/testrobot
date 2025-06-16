@@ -1,8 +1,3 @@
-Pass: 
-  AOC: "P@ssw0rdQA"
-  BANK002: "P@ssw0rd002t"
-  NITMX: "P@ssw0rd"
-
 secret_key: "D9CC2BC856EC508E4CB720E897029574987DCA5A"
 secret_key_qa: "965180A90B27D6211BC0DB10DD63872CFDE87692"
 Around:
@@ -10,3 +5,6 @@ Around:
     รอบสอง: "1200"
     รอบสาม: "1600"
     รอบเฟล: "1500"
+
+Pass: 
+  AOC: "P@ssw0rdQA"
