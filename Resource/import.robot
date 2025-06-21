@@ -6,6 +6,7 @@ Library        Collections
 Library        DatabaseLibrary
 Library        pymysql
 Library        DateTime
+Library    JSONLibrary
 Library        ExcelLibrary
 Library        ExcelRobot
 Library        REST

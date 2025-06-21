@@ -1,1 +1,29 @@
-robotframework
+# Robot Framework Core
+robotframework>=6.0
+
+# Selenium Library for web automation
+robotframework-seleniumlibrary>=6.0.0
+selenium>=4.0.0
+
+# Database Libraries
+robotframework-databaselibrary>=1.2.4
+pymysql>=1.0.2
+
+# JSON Library
+robotframework-jsonlibrary>=0.5
+
+# Excel Libraries - Working alternatives
+openpyxl>=3.0.0
+xlrd>=2.0.0
+pandas>=1.5.0
+robotframework-datadriver>=1.6.0
+
+# REST API Libraries
+robotframework-requests>=0.9.4
+RESTinstance>=1.4.7
+
+# Additional dependencies for REST library
+setuptools>=65.0.0
+
+# Web driver managers (optional but recommended)
+webdriver-manager>=3.8.0
