@@ -2,6 +2,6 @@
 app_minimal:                    resources/app-release.apk
 
 # real 
-platformVersion:                '11'
-deviceName:                     SM-G715FN/DS
-udid:                           R58R13SDA0R
+platformVersion:                '14'
+deviceName:                     realme C53
+udid:                           0H63713I50101F64
