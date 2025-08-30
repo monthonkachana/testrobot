@@ -1,0 +1,84 @@
+host : https://cfr-uat.itmx.co.th/core
+db:
+    username: CFAS_UAT
+    password: 1TMXpassw0rd
+    conn_str: 10.208.1.6:1523/CFRDBSIT
+dbapp:
+    username: CFRAPP_UAT
+    password: 1TMXpassw0rd
+    conn_str: 10.208.1.6:1523/CFRDBSIT
+    
+ENVAOC: "aoc_uat"
+# host: https://cfr-dev.itmx.co.th/core
+host_jwt: https://api-ext-dev.itmx.co.th
+jwt: /jwt
+Host_Aoc: https://api-sit.itmx.co.th
+Host_GET: https://cfr-uat.itmx.co.th
+Path:
+    submit: /cfr/aoc/submit-police-case
+    freeze: /cfr/aoc/freeze-accounts
+    unfreeze: /cfr/aoc/unfreeze-accounts
+    money: /cfr/aoc/request-money-trail
+    GetFileName: "/fraud-api/api/fraud-account/fraud-account-report-list"
+    triggerWH: "/fraud-sftp-aoc-api/sftp/trigger/manual/receiver/warrant-h"
+    WithdrawAPI: "/fraud-withdraw-mule/sftp/trigger/manual/receiver/withdraw-mule"
+    waryJuristic: "/fraud-sftp-aoc-mule-file/sftp/trigger/manual/receiver/mule-file"
+db:
+    username: CFASAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBUAT
+dbapp:
+    username: CFRAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBUAT
+
+# db:
+#     username: CFASAPP
+#     password: 1TMXpassw0rd
+#     conn_str: 10.232.3.82:1522/CFRDBSIT
+# dbapp:
+#     username: CFRAPP
+#     password: 1TMXpassw0rd
+#     conn_str: 10.232.3.82:1522/CFRDBSIT
+    
+header:
+Content-Type: application/json
+X-API-Version: v1
+X-CRT-Version: 1441-20240910
+apikey: 888
+apisecret: 888_secret
+privatekey: -----BEGIN PRIVATE KEY-----MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDTJ5a3GoUjPYmk/mxsXFFqbA+xbbw+OipjEP0/C+VLFjZ/I6sjwGRAfQALKGSDBjY2GQSBCV/DIFk3ZdYGm9fbif7apXn7Vz6Z8PSoXtp/fuxx3etxRXyIAwiuF00SXtEFHlRaW2TBeK7dKmBCIBYREZdCcbkFhDSwVJJoEUB6O8BpUrwpVmdIuRuF6ylG9q0Pyg9MD7ouAOt3hwx+02TgKakGHjdCtxNoBBqFo79J+KBDlHhBJBEn5oifn6EamdlNHpyrN+pz9HyEzdb2B+mvjwCBzvc4LjWffqt6XLlAIKwezaICYT5PjYnhOGVARQdLO6FNAdvsMfH7TUBSes3/AgMBAAECggEAedFAGRi6sI8DBuYlRQqpib0X/KOzUy8ZXxfhEmtZeE0zWXwJctG+xJmY2dcOzaxawDEEsTDoR1k1P0mIBT4JdUWSey+2RPObURJ7A1vdsGpYHIUMHMgaxRkC+/TDaRK8gbhyr8JESX3HXB7jc6KxOF2upw2W0YDpKMVRxaoWSa18HD5v9SdrZ6tJEVuiVobI8748P/WTmhQgij6f1Rhvi9F4TPvPxfu7voW6KBK0p4ZZ1JZojvTfxBVMtKzfBj5aY23Vvxvm7ivxfWsnPQfjs8AJBdcpm7dsLdiKJXB2nX/yDkRViCf3+SNOIIx9JpwsbicroF4TaXYOLHIWNSc5yQKBgQD6e4xB4hwJ4ltpy4Bun6P5/lDbKkLAvNtv9L25BTJ8XYuJHcYlfCxjT9HjT+F7voEjoKz5FPJnLPfcnzfU71ZbdLWIq0qgeLTc3PakApdG32pL1k7xFdXqWtYwgl1qTL87Yy5gEZM+K4H6PG1qOYgiAlmQtBvrGc1+OAfapYY0cwKBgQDXzkYDMeI2BtFIGSL+ZuJAmKVbR6hmrcgMBqJyexiUQHIgbsI31Eo7IfhY4EqAoUvHSSCtAky3K49vJuMf0MuhGJOXXKEcD5UTCtw9J0UpeYMGi09ivzuNZ38Ft7eeNffn3yxe6O78xKe6wvrksEPMW+DJYKeRo9ii2BOC/6bpRQKBgQCArd/MKODGoybbHtSIADM5RtE7BmbspRkGVvDwkB7zjQsWEdmtgDE9g9ALuwnXjHLDXtP90ikFoDBlgtYn6hyvNzHbWEQqVFh17n42m64jlrsA4sQDTnhqwOewXAiph2vmknlMmTrPgYJwj4KWQ6AP+K0SjbSZ/tN2uEowpUBgyQKBgQCdm3lIZgsWd/4qUKlc8Ni2YoUJWBkl/C8IkWPchggaZcKz6xAO5AzeiN2uUwg2TxZf0gl6MR7D+51CiT0BBGVjHubTeYP0UXEHOjxEsURymNrXUbDFpnIgwIBlNZp1gmauQjBOlIHNuvXgkPvZPt4VBtjxWZSn6eiSbYo6dul4nQKBgC/TrZLNCmv+qrS8qpRlRxiJWGEPNsSj+ztFmCgn9oM4hLDdQva/4Ypi0fE1wPhBAPMT6ZZZ3+AkyMUNJdgIp4WTSH025s+VoGFTj5pKaGcFejSnIEOFhgWFZx+MYueaM50xaI8/SqIIT6Z7U9NppjOjM6vSqmYp6oQ6oc+8E2MZ-----END PRIVATE KEY-----
+issuer: 1441
+audience: 000
+
+itmxadm:
+    user: "itmxadm"
+    password: "P@ssCloud1"
+root:
+    user: "root"
+    password: "P@ssCloud1"
+bank_999:
+    user: "999cfr"
+    password: "999cfr"
+
+AOC:
+    user: "1441cfr"
+    password: "1441cfr"
+sfpi:
+    bankA: "037"
+    bankB: "038"
+hostsftp:
+    ip: "10.210.1.229"
+hostmaster:
+    ip: "10.209.1.110"
+master:
+    user: "kubeapp"
+    password: "kubeapp"
+signature:
+    ip: "10.209.1.221"
+    user: "itmxadm"
+    password: "itmx123"
+namespace: "dscf-track1"
+ENVAOC: "aoc_uat"
+ENVBANK: "stp_uat"
+SECAOC: "QA_AOC"

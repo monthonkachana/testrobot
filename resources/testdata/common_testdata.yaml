@@ -1,0 +1,109 @@
+merchants:
+    epin_by_cash:
+        merchants_id: "700000084"
+        merchants_invalid: "8000102999"
+        password: "part_epin123"
+        password_invalid: "12345"
+        bank_code: "PART_EPIN"
+        branch_code: "branch_code"
+        channnel: "C"
+        channnel_invalid: "z"
+        term_id: "12345"
+        to_mobile_valid: "0200010010"
+        from_mobile_valid: "0600007077"
+        cus_no_invalid: "0899999999"
+        cus_no_morethan_10digit: "0899999999999999"
+        cus_no_not_number: "twentytest"
+        channel_detail : ""
+        amount_50: 50
+        amount_90: 90
+        amount_100: 100
+        amount_150: 150
+        amount_20: 20
+        amount_invalid: 60
+        channel_detail : 46
+        ref1: '000000000000000000'
+        ref1_invalid: '11111111111111111111'
+
+    # merchant for e-wallet
+    epin_by_wallet:
+        merchants_id: "700000082"
+        merchants_invalid: "8000102999"
+        password: "tmnew123"
+        password_invalid: "1234"
+        bank_code: "EWMOBILE"
+        bank_code_invalid: "bankcode"
+        branch_code: "branch_code"
+        channnel: "C"
+        channnel_invalid: "z"
+        term_id: "12345"
+        to_mobile_valid: "0200010010"
+        from_mobile_valid: "0600007077"
+        from_mobile_invalid: "1231231000"
+        from_mobile_notfound_tmnid: "0800000000"
+        from_mobile_error_from_core_service: "0916988838"
+        cus_no_invalid: "0899999999"
+        cus_no_morethan_10digit: "0899999999999999"
+        cus_no_not_number: "twentytest"
+        channel_detail : 46
+        channel_invalid: 123
+        amount_50: 50
+        amount_90: 90
+        amount_invalid: 60
+
+    # merchant for "amt_rule_flg"
+    wop:
+       merchants_id: "700000030"
+       password: "wop123"
+       amount_90: 90
+       amount_invalid: 0.100 # mod 1000 not equal 0
+       amount_lessthan_fixmin: 9 #fix_min = 10
+       amount_morethan_fixmax: 1500.00 #fix_max = 1000
+       bank_code: "WOP"
+
+    # mock ecashStock doConfirmEpin fail
+    merchant85:
+        merchants_id: "700000085"
+        password: "part_epin123"
+        bank_code: "MERCHANT85"
+
+    merchant86:
+        merchants_id: "700000086"
+        password: "part_epin123"
+        bank_code: "MERCHANT86"
+
+    # merchant for merchant_cond_scr is null
+    tesco:
+        merchants_id: "800000693"
+    # merchant for not found "amt_rule_flg" and "product_id" on special_cond_ref table
+    the_mall:
+        merchants_id: "100000002"
+    # merchant for amount product_id incorrect without (10000,100000,15000,20000,30000,5000,50000,9000)
+    bigc:
+       merchants_id: "700000014"
+       amount_250: 250
+    # merchant not contain product_id
+    tbank_l2_atm_topup:
+       merchants_id: "100000150"
+
+    fixmin_morethan_fixmax:
+       merchants_id: "222222222"
+
+msg_type:
+    verify: "VERIFY"
+    confirm: "CONFIRM"
+    resend: "RESEND"
+    void: "VOID"
+
+serviceCode:
+    valid: "TMNEPIN"
+    invalid: "EPIN"
+
+request_type:
+    cash: "Cash"
+    cash_invalid: "CASH"
+    wallet: "E-Wallet"
+    wallet_invalid: "E-WALLET"
+
+fund_name: "verifybuyepin"
+

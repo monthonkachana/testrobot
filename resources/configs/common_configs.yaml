@@ -1,0 +1,24 @@
+mpp_path:
+    main: /mpp-registration/v1.0/registration/participant/
+    mainF: /mpp-registration/v1.0/registreeation/participant/
+    mainD:
+#    lookup: /mpp-lookup/v1.0/lookup/participant/
+
+    # POST
+    regis: /register
+    regisC:
+    # PUT
+    amend: /amend/registrationId
+
+    # POST
+    deactivate_wiht_id: /deactivate/registrationId
+    deactivate_wiht_proxy: /deactivate/proxy
+    deactivate_wiht_proxy_account: /deactivate/proxyAndAccount
+    deactivate_wiht_account: /deactivate/account
+
+    # GET
+    # ใส่เพิ่มเอง
+    enquiry_wiht_id: /enquiry/registrationId?
+    enquiry_wiht_proxy_account: /enquiry/proxyAndAccount?
+    enquiry_wiht_proxy: /enquiry/proxy?
+    enquiry_wiht_account: /enquiry/account?

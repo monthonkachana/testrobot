@@ -1,0 +1,126 @@
+host: https://cfr-dev.itmx.co.th/core
+host_jwt: https://api-ext-dev.itmx.co.th
+jwt: /jwt
+Host_Aoc: https://api-sit.itmx.co.th
+Host_GET: https://cfr-dev.itmx.co.th
+Host_UAT: https://cfr-uat.itmx.co.th
+Path:
+    submit: /cfr/aoc/submit-police-case
+    freeze: /cfr/aoc/freeze-accounts
+    unfreeze: /cfr/aoc/unfreeze-accounts
+    money: /cfr/aoc/request-money-trail
+    GetFileName: "/fraud-api/api/fraud-account/fraud-account-report-list"
+    triggerWH: "/fraud-sftp-aoc-api/sftp/trigger/manual/receiver/warrant-h"
+    triggerBlackmule: "/fraud-sftp-aoc-mule-file/black-mule/trigger/manual/receiver/black-mule"
+    triggerWithdrawBlackmule: "/fraud-withdraw-mule/sftp/trigger/manual/receiver/withdraw-black-mule"    
+    triggerWary: "/fraud-sftp-aoc-mule-file/sftp/trigger/manual/receiver/mule-file"
+    triggerMTRonetime: "/fraud-sftp-aoc-onetime/sftp/trigger/manual/receiver/mtr-onetime"
+    darkbrownreport: "/fraud-brown-mule-report/report/manual-brownMuleReport"
+    downloadreportdarkbrown: "fraud-brown-mule/report/downloadReport"
+    downloadreportwary: "/fraud-sftp-aoc-mule-file/wary-juristic-mule/report/download"
+    Brownmulefiletobase64: "fraud-brown-mule/fileToBase64"
+    BrownmuleUploadFile: "fraud-brown-mule/upload-file"
+    BrownmuleUploadFileToconfirm: "fraud-brown-mule/upload-file/confirm"
+    downloadreportwithdraw: "fraud-withdraw-mule/report/download"
+    WithdrawAPI: "/fraud-withdraw-mule/sftp/trigger/manual/receiver/withdraw-mule"
+    MoneytrailAPI: "/fraud-sftp-aoc-onetime/sftp/trigger/manual/receiver/mtr-onetime"
+
+# db:
+#     username: CFAS_SIT
+#     password: 1TMXpassw0rd
+#     conn_str: 10.208.1.6:1523/CFRDBSIT
+# dbapp:
+#     username: CFRAPP
+#     password: 1TMXpassw0rd
+#     conn_str: 10.208.1.6:1523/CFRDBSIT
+
+db:
+    username: CFASAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBSIT
+dbapp:
+    username: CFRAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBSIT
+dbuat:
+    username: CFASAPP
+    password: 1TMXpassw0rd
+    conn_str: 10.232.3.82:1522/CFRDBUAT
+
+header:
+Content-Type: application/json
+X-API-Version: v1
+X-CRT-Version: 1441-20240910
+apikey: 888
+apisecret: 888_secret
+privatekey: -----BEGIN PRIVATE KEY-----MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDTJ5a3GoUjPYmk/mxsXFFqbA+xbbw+OipjEP0/C+VLFjZ/I6sjwGRAfQALKGSDBjY2GQSBCV/DIFk3ZdYGm9fbif7apXn7Vz6Z8PSoXtp/fuxx3etxRXyIAwiuF00SXtEFHlRaW2TBeK7dKmBCIBYREZdCcbkFhDSwVJJoEUB6O8BpUrwpVmdIuRuF6ylG9q0Pyg9MD7ouAOt3hwx+02TgKakGHjdCtxNoBBqFo79J+KBDlHhBJBEn5oifn6EamdlNHpyrN+pz9HyEzdb2B+mvjwCBzvc4LjWffqt6XLlAIKwezaICYT5PjYnhOGVARQdLO6FNAdvsMfH7TUBSes3/AgMBAAECggEAedFAGRi6sI8DBuYlRQqpib0X/KOzUy8ZXxfhEmtZeE0zWXwJctG+xJmY2dcOzaxawDEEsTDoR1k1P0mIBT4JdUWSey+2RPObURJ7A1vdsGpYHIUMHMgaxRkC+/TDaRK8gbhyr8JESX3HXB7jc6KxOF2upw2W0YDpKMVRxaoWSa18HD5v9SdrZ6tJEVuiVobI8748P/WTmhQgij6f1Rhvi9F4TPvPxfu7voW6KBK0p4ZZ1JZojvTfxBVMtKzfBj5aY23Vvxvm7ivxfWsnPQfjs8AJBdcpm7dsLdiKJXB2nX/yDkRViCf3+SNOIIx9JpwsbicroF4TaXYOLHIWNSc5yQKBgQD6e4xB4hwJ4ltpy4Bun6P5/lDbKkLAvNtv9L25BTJ8XYuJHcYlfCxjT9HjT+F7voEjoKz5FPJnLPfcnzfU71ZbdLWIq0qgeLTc3PakApdG32pL1k7xFdXqWtYwgl1qTL87Yy5gEZM+K4H6PG1qOYgiAlmQtBvrGc1+OAfapYY0cwKBgQDXzkYDMeI2BtFIGSL+ZuJAmKVbR6hmrcgMBqJyexiUQHIgbsI31Eo7IfhY4EqAoUvHSSCtAky3K49vJuMf0MuhGJOXXKEcD5UTCtw9J0UpeYMGi09ivzuNZ38Ft7eeNffn3yxe6O78xKe6wvrksEPMW+DJYKeRo9ii2BOC/6bpRQKBgQCArd/MKODGoybbHtSIADM5RtE7BmbspRkGVvDwkB7zjQsWEdmtgDE9g9ALuwnXjHLDXtP90ikFoDBlgtYn6hyvNzHbWEQqVFh17n42m64jlrsA4sQDTnhqwOewXAiph2vmknlMmTrPgYJwj4KWQ6AP+K0SjbSZ/tN2uEowpUBgyQKBgQCdm3lIZgsWd/4qUKlc8Ni2YoUJWBkl/C8IkWPchggaZcKz6xAO5AzeiN2uUwg2TxZf0gl6MR7D+51CiT0BBGVjHubTeYP0UXEHOjxEsURymNrXUbDFpnIgwIBlNZp1gmauQjBOlIHNuvXgkPvZPt4VBtjxWZSn6eiSbYo6dul4nQKBgC/TrZLNCmv+qrS8qpRlRxiJWGEPNsSj+ztFmCgn9oM4hLDdQva/4Ypi0fE1wPhBAPMT6ZZZ3+AkyMUNJdgIp4WTSH025s+VoGFTj5pKaGcFejSnIEOFhgWFZx+MYueaM50xaI8/SqIIT6Z7U9NppjOjM6vSqmYp6oQ6oc+8E2MZ-----END PRIVATE KEY-----
+issuer: 1441
+audience: 000
+
+itmxadm:
+    user: "itmxadm"
+    password: "P@ssCloud1"
+root:
+    user: "root"
+    password: "P@ssw0rd"
+bank_999:
+    user: "999cfr"
+    password: "999cfr"
+bank_002:
+    user: "002cfr"
+    password: "002cfr"
+
+AOC:
+    user: "1441cfr"
+    password: "1441cfr"
+sfpi:
+    bankA: "037"
+    bankB: "038"
+hostsftp:
+    ip: "10.210.1.229"
+hostmaster:
+    ip: "10.209.1.110"
+master:
+    user: "kubeapp"
+    password: "kubeapp"
+signature:
+    ip: "10.209.1.221"
+    user: "itmxadm"
+    password: "itmx123"
+namespace: "dscf-track1"
+ENVAOC: "aoc_sit"
+ENVUAT: "aoc_uat"
+ENVBANK: "stp_sit"
+BANKCODE:
+    002: "002cfr"
+SECAOC: "QA_AOC"
+# db:
+#     b2b:
+#         username: sfpidev
+#         password: 1TMXpassw0rd
+#         conn_str: 10.208.1.5:1522/b2bdbdev
+enquiryService:
+    bearer: "https://api-pp-k8s-nft.itmx.co.th:50443"
+    host: "https://api-ext-dev.itmx.co.th"
+    path:
+        presentmentlist: "/sfpi/enquiry/presentmentlist"
+        paymentupdate: "/sfpi/enquiry/paymentupdate"
+        paymentlist: "/sfpi/enquiry/paymentlist"
+        precheckpayment: "/sfpi/enquiry/precheckpayment"
+        docdetail: "/sfpi/enquiry/docdetail"
+        docdetailstream: "/sfpi/enquiry/docdetailstream"
+        presentmentpaymentaccepted: "/sfpi/enquiry/presentmentpaymentaccepted"
+        jwtbeare: "/jwt/banks/"
+    header:
+        bankA:
+            APIVersion : "v1"
+            XCRTVersion : "037-20220707"
+            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJhdWQiOiIwMDAiLCJhcGlzZWNyZXQiOiI4ODhfc2VjcmV0IiwiYXBpa2V5IjoiODg4IiwiaXNzIjoiMDM3IiwiZXhwIjoxNzAwNTE0ODA0LCJqdGkiOiJjYjhlZWZmOS0wZGQwLTQ0NzktOThiOS04MzM3YzU4OTMwMzMifQ.mQhJeznCkKDwBg8n5lT1zQg1_Dirk2YhWezBPJ2lSTjZZ2aoD14lZ-CS8fF6a5xwhM0P6yoJCPab7JEcl4Rnbp1bDLxXncUrnk1HQJhCfnfeEi-B2xOdvDHVtUOLkTKqW--RZeupWbDcy5OmdC_g0LQGK6_AqiKXQExGW41ABQDjD1Aj_i41teBh6HJepH83MbkM5U9kFTGAOHkuKw_UfZrwr36TV-sVAuFLZaB0hqK34_oDRXO1tLWfJJKVp9d6WExPX1hRgnjxhG0pzxcx2ikl_Di3cEXaJ7CM51F2yJLjX2E-dBaMJ1lB1R3nXbUyzy5QBPXUILNvgjkN6fYc7w"
+        bankB:
+            APIVersion : "v1"
+            XCRTVersion : "038-20220707"
+            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJhdWQiOiIwMDAiLCJhcGlzZWNyZXQiOiI4ODhfc2VjcmV0IiwiYXBpa2V5IjoiODg4IiwiaXNzIjoiMDM4IiwiZXhwIjoxNzAwNTE0ODA0LCJqdGkiOiI4MjQyZDYyYy1jODY3LTQ5MTYtODU5ZS1lMDA5ZGY1YmM0ZjYifQ.Puj09Qt2Zj2DpGaSEhbCe9L8W5H2c6VfRmTRR60NcjjcgbcJLplM2nQlzERObG4ghc63cE84zik0nyGPYWT1-d3Bx0a6Z8hqHQ_VcuTpzFn9l3ZZ51ZsyIxRBqUerBxcZyqGW1NnwkSLTBXX5r3ZaRsMnvSScbZFBhe9VAcyT_gshJScyJOtKePZXHv8AvNaj4KPeaeTozm02i5anr5Ns4aE2qFhRamcYrAfwz3rw7166CtBOPppw1dDiEiyozCv7WJ4OSUZ7itloPPTUarBRLtkyrKb1PaQ43wr-tCKE99iOvoNbIB2cGiMUl-dsNsP94Klo9eVESS7C2hjvsrZYw"
+        bankInvalid:
+            APIVersion : "v1"
+            XCRTVersion : "022-20200212"
+            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJhdWQiOiIwMDAiLCJhcGlzZWNyZXQiOiI4ODhfc2VjcmV0IiwiYXBpa2V5IjoiODg4IiwiaXNzIjoiMDIyIiwiZXhwIjoxNzAwNTE0ODA0LCJqdGkiOiI4ODEzNmQ1ZC1jMmVkLTRlNDQtYjExNy00NTQ5OWQ3YzRkOTgifQ.QADKtdkz3r7xB8EWZY_lPwo-Ks0Q3SSAN27grK4fM9KkreIIKj2ewM9iJ0ilTiLQaYIIS_3r0o_pZoAkqP-sCC3G40mYP-skt1B2bcQR795zjY4_TSnZGhBouBZddUhYfUJESkpvyQroIH7M8gVRf8-OijWVZ9PRSBlRnlSTnIvp93DZIs06UeWTtTOXnGZlggKi4GKK1AO5GdmQUJmtXKpv65wontNoYbD22ouTjP_zBPz8qXNYx0OWEm9u53MBXtex7DWfPDoeDlcJWxWuV1HfWO4FLsbXn3C7o9X-BGJ2YX3YTLvSrnyoFiB3l54AD0SlcRbFzpie7PWT1QBi1w"

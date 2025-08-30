@@ -1,0 +1,83 @@
+BBL:
+    bank_code : "002"
+KBNK:
+    bank_code : "004"
+KTB:
+    bank_code : "006"
+JPMC:
+    bank_code : "008"
+OCBC:
+    bank_code : "009"
+TTB:
+    bank_code : "011"
+SCB:
+    bank_code : "014"
+CITI:
+    bank_code : "017"
+SMBC:
+    bank_code : "018"
+SCBT:
+    bank_code : "020"
+CMBT:
+    bank_code : "022"
+RHB:
+    bank_code : "023"
+UOBT:
+    bank_code : "024"
+BAY:
+    bank_code : "025"
+MEGA:
+    bank_code : "026"
+BOA:
+    bank_code : "027"
+IOB:
+    bank_code : "029"
+GSB:
+    bank_code : "030"
+HSBC:
+    bank_code : "031"
+DB:
+    bank_code : "032"
+GHB:
+    bank_code : "033"
+BAAC:
+    bank_code : "034"
+EXIM:
+    bank_code : "035"
+MHCB:
+    bank_code : "039"
+BNPP:
+    bank_code : "045"
+BOC:
+    bank_code : "052"
+ISBT:
+    bank_code : "066"
+TSCO:
+    bank_code : "067"
+KKP:
+    bank_code : "069"
+ICBC:
+    bank_code : "070"
+TCRB:
+    bank_code : "071"
+LHB:
+    bank_code : "073"
+SMTB:
+    bank_code : "080"
+SME:
+    bank_code : "098"
+ALL:
+    bank_code1 : "BBL"
+    bank_code2 : "KBNK"
+    bank_code3 : "KTB"
+    bank_code4 : "JPMC"
+    bank_code5 : "OCBC"
+    bank_code6 : "TTB"
+    bank_code7 : "SCB"
+    bank_code8 : "CITI"
+    bank_code9 : "SMBC"
+    bank_code10 : "SCBT"
+    bank_code11 : "CMBT"
+    bank_code12 : "RHB"
+    bank_code13 : "CMBT"
+    bank_code14 : "BAY"

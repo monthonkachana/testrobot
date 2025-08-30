@@ -1,0 +1,803 @@
+resp:
+    http_resp:
+        success: '<Response [200]>'
+        not_found: '<Response [404]>'
+        fobidden: '<Response [403]>'
+        Method_Not_Allowed: '<Response [405]>'
+        internal_server_error: '<Response [500]>'
+        URL_is_empty: 'Request URL is empty'
+    service_resp:
+        success:
+            code: '000'
+        exits_proxy:
+            code: '710'
+        Participant_is_retired:
+            code: '703'
+        Structural_failure:
+            code: '602'
+        proxy_type_invalid:
+            code: '802'
+        acc_type_invalid:
+            code: '902'
+        acc_different_participant:
+            code: '927'
+        proxy_registered_with_different_participant:
+            code: '800'
+        Proxy_type_not_supported_by_participant:
+            code: '811'
+        participant_does_not_support:
+            code: '932'
+        account_name_does_not_match_existing:
+            code: '926'
+        authentication_failure:
+            code: '601'
+        proxy_not_registered_mpp:
+            code: '801'
+        proxy_account_combination_not_registered_mpp:
+             code: '907'
+        account_not_registered_mpp:
+             code: '930'
+        account_status_not_valid:
+             code: '936'
+        account_status_not_valid_deactive:
+             code: '940'
+Res_Aoc:
+    success:
+        Freeze_Account_success:
+                code: '0000'
+                msg: 'SUCCESS'
+        UnFreeze_Account_success:
+                code: '0000'
+                msg: 'SUCCESS'
+        Submit_Police_success:
+                code: '0000'
+                msg: 'SUCCESS'
+        Request_Money_Trail_success:
+                code: '0000'
+                msg: 'SUCCESS'
+    Fail:
+        BankCaseID_does_not_found:
+                    code: '6600'
+                    msg: 'BankCaseID does not found'
+                    msg_bank: 'Invalid Request. BankCaseID does not found'
+        Invalid_format_BankCaseID:
+                    code: '6606'
+                    msg: 'Invalid format: bankcaseid'
+        Invalid_format_warrant_type:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_type'
+        Invalid_format_warrant_date:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_date'
+        Invalid_format_warrant_id:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_id'
+        Invalid_format_account_no :
+                    code: '6606'
+                    msg: 'Invalid format: account_no'
+        Invalid_format_warrant_time:
+                    code: '6606'
+                    msg: 'Invalid format: warrant_time'
+        Invalid_format_ref_freeze_warrant:
+                    code: '6606'
+                    msg: 'Invalid format: ref_freeze_warrant'
+        Invalid_format_bank_code:
+                    code: '6606'
+                    msg: 'Invalid format: bank_code'
+        Invalid_warrant_type:
+                    code: '6601'
+                    msg: 'Invalid warrant_type'
+        Invalid_value_condition_warrant_type:
+                    code: '6607'
+                    msg: 'Invalid value condition: warrant_type'
+        Invalid_value_condition_warrant_id:
+                    code: '6607'
+                    msg: 'Invalid value condition: warrant_id'
+        Missing_require_field_bankcaseid:
+                    code: '6605'
+                    msg: 'Missing require field: bankcaseid'
+        Missing_require_field_warrant_date:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_date'
+        Missing_require_field_warrant_time:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_time'
+        Missing_require_field_warrant_type:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_type'
+        Missing_require_field_warrant_id:
+                    code: '6605'
+                    msg: 'Missing require field: warrant_id'
+        Missing_require_field_account_no:
+                    code: '6605'
+                    msg: 'Missing require field: account_no'
+        Missing_require_field_ref_freeze_warrant:
+                    code: '6605'
+                    msg: 'Missing require field: ref_freeze_warrant'
+        Missing_require_field_bank_code:
+                    code: '6605'
+                    msg: 'Missing require field: bank_code'
+        ref_freeze_warrant_cannot_be_found:
+                    code: '6603'
+                    msg: 'ref_freeze_warrant cannot be found'
+        Some records are duplicate within the same file:
+                    code: '6609'
+                    msg: 'Some records are duplicate within the same file'
+        Request_body_contain_invalid_format:
+                    code: '6400'
+                    msg: 'Request body contain invalid format'
+        Participant6403:
+                    code: '6403'
+                    msg: 'Participant does not subscribe to this service.'
+        Invalid_signature:
+                    code: '6403'
+                    msg: 'INVALID_SIGNATURE'
+ResHS:
+    Success:
+        code: '0000'
+        msg: 'SUCCESS'
+    bankcase_not_found:
+        code: '6600'
+        msg: 'BankCaseID does not found'
+    Missing_require_warrant:
+        code: '6605'
+        msg: 'Missing require field: warrant_id'
+        msg_type: 'Missing require field: warrant_type'
+        msg_bank: 'Missing require field: bankcaseid'
+        msg_date: 'Missing require field: warrant_date'
+        msg_time: 'Missing require field: warrant_time'
+    Invalid_format_warrant:
+        code: '6606'
+        msg: 'Invalid format: warrant_id'
+        msg_type: 'Invalid format: warrant_type'
+        msg_date: 'Invalid format: warrant_date'
+        msg_time: 'Invalid format: warrant_time'
+    Invalid_warrant:
+        code: '6601'
+        msg: 'Invalid warrant_type'
+    Invalid_value_condition:
+        code: '6607'
+        msg_id: 'Invalid value condition: warrant_id'
+        msg_date: 'Invalid value condition: warrant_date'
+        msg_time: 'Invalid value condition: warrant_time'
+        msg_type: 'Invalid value condition: warrant_type'
+    bankcase_bound_warrant_id:
+        code: '6608'
+        msg: 'bankcaseid has been bound with other warrant_id'
+    Invalid_Header_csv_file_format:
+        code: '6100'
+        msg: 'INVALID_HEADER_CSV_FILE_FORMAT'
+    Invalid_file_name:
+        code: '6103'
+        msg: 'INVALID_FILE_NAME_FORMAT'
+    Invalid_file_structure:
+        code: '6105'
+        msg: 'INVALID_FILE_STRUCTURE'
+    Recodr_exceed_limit:
+        code: '6106'
+        msg: 'RECORD_EXCEED_LIMIT'
+    SOME_ITEM_DUPLICATE:
+        code: '6108'
+        msg: 'SOME_ITEM_DUPLICATE'
+    invalid_date_no_filename:
+        code: '6109'
+        msg: 'INVALID_DATE_ON_FILENAME'
+    duplicate_filename:
+        code: '6110'
+        msg: 'DUPLICATE_FILENAME'
+    invalid_file_format:
+        code: '6112'
+        msg: 'INVALID_FILE_FORMAT'
+    invalid_req_format:
+        code: '6113'
+        msg: 'INVALISYSTEM_REQUIRED_AT_LEAST_ONE_TRANSACTIOND_FILE_FORMAT'
+    system_req_transaction:
+        code: '6113'
+        msg: 'SYSTEM_REQUIRED_AT_LEAST_ONE_TRANSACTION'
+WithDraw:
+    Success:
+        code: '0000'
+        msg: 'SUCCESS'
+    invalid_declare_uuid:
+        code: '6706'
+        msg: 'Invalid format: declare_uuid'
+    invalid_declare_type_code:
+        code: '6706'
+        msg: 'Invalid format: declare_type_code'
+    invalid_declare_date:
+        code: '6706'
+        msg: 'Invalid format: declare_date'
+    invalid_declare_type:
+        code: '6706'
+        msg: 'Invalid format: declare_type'
+    invalid_declare_note:
+        code: '6706'
+        msg: 'Invalid format: declare_note'
+    invalid_declare_reason_code:
+        code: '6706'
+        msg: 'Invalid format: declare_reason_code'
+    invalid_declare_reason:
+        code: '6706'
+        msg: 'Invalid format: declare_reason'
+    invalid_mule_ref_code:
+        code: '6706'
+        msg: 'Invalid format: mule_ref_code'
+    invalid_mule_birth_date:
+        code: '6706'
+        msg: 'Invalid format: mule_birth_date'
+    invalid_mule_nationality:
+        code: '6706'
+        msg: 'Invalid format: mule_nationality'
+    invalid_mule_identity_id:
+        code: '6706'
+        msg: 'Invalid format: mule_identity_id'
+    invalid_mule_identity_type:
+        code: '6706'
+        msg: 'Invalid format: mule_identity_type'
+    invalid_mule_title:
+        code: '6706'
+        msg: 'Invalid format: mule_title'
+    invalid_mule_name:
+        code: '6706'
+        msg: 'Invalid format: mule_name'
+    invalid_mule_surname:
+        code: '6706'
+        msg: 'Invalid format: mule_surname'
+    invalid_condition_declare_date:
+        code: '6707'
+        msg: 'Invalid value condition: declare_date'
+    invalid_condition_mule_nationality:
+        code: '6707'
+        msg: 'Invalid value condition: mule_nationality'
+    invalid_condition_declare_type:
+        code: '6707'
+        msg: 'Invalid value condition: declare_type'
+    invalid_condition_declare_reason:
+        code: '6707'
+        msg: 'Invalid value condition: declare_reason'
+    invalid_condition_police_case_report_date:
+        code: '6707'
+        msg: 'Invalid value condition: police_case_report_date'
+    missing_declare_uuid:
+        code: '6705'
+        msg: 'Missing required field: declare_uuid'
+    missing_declare_type_code:
+        code: '6705'
+        msg: 'Missing required field: declare_type_code'
+    missing_declare_type:
+        code: '6705'
+        msg: 'Missing required field: declare_type'
+    missing_declare_date:
+        code: '6705'
+        msg: 'Missing required field: declare_date'
+    missing_declare_reason_code:
+        code: '6705'
+        msg: 'Missing required field: declare_reason_code'
+    missing_declare_reason_code_value:
+        code: '6705'
+        msg: 'Missing required field: declare_reason_code'
+    missing_declare_reason:
+        code: '6705'
+        msg: 'Missing required field: declare_reason'
+    missing_declare_note:
+    missing_declare_reason_value:
+        code: '6705'
+        msg: 'Missing required field: declare_reason'
+    missing_declare_note:
+        code: '6705'
+        msg: 'Missing required field: declare_note'
+    missing_declare_note_value:
+        code: '6705'
+        msg: 'Missing required field: declare_note'
+    missing_mule_ref_code:
+        code: '6705'
+        msg: 'Missing required field: mule_ref_code'
+    missing_mule_ref_code_value:
+        code: '6705'
+        msg: 'Missing required field: mule_ref_code'
+    missing_mule_identity_id:
+        code: '6705'
+        msg: 'Missing required field: mule_identity_id'
+    missing_mule_identity_id_value:
+        code: '6705'
+        msg: 'Missing required field: mule_identity_id'
+    missing_mule_identity_type:
+        code: '6705'
+        msg: 'Missing required field: mule_identity_type'
+    missing_mule_identity_type_value:
+        code: '6705'
+        msg: 'Missing required field: mule_identity_type'
+    missing_mule_title:
+        code: '6705'
+        msg: 'Missing required field: mule_title'
+    missing_mule_name:
+        code: '6705'
+        msg: 'Missing required field: mule_name'
+    missing_mule_name_value:
+        code: '6705'
+        msg: 'Missing required field: mule_name'
+    missing_mule_surnname:
+        code: '6705'
+        msg: 'Missing required field: mule_surname'
+    missing_mule_birth_date:
+        code: '6705'
+        msg: 'Missing required field: mule_birth_date'
+    missing_mule_account_no:
+        code: '6705'
+        msg: 'Missing required field: mule_account_no'
+    missing_mule_account_no_value:
+        code: '6705'
+        msg: 'Missing required field: mule_account_no'
+    missing_mule_account_type:
+        code: '6705'
+        msg: 'Missing required field: mule_account_type'
+    missing_mule_account_type_value:
+        code: '6705'
+        msg: 'Missing required field: mule_account_type'
+    is_missing_mule_account_bank:
+        code: '6705'
+        msg: 'Missing required field: mule_account_bank_code'
+    missing_mule_account_bank:
+        code: '6705'
+        msg: 'Missing required field: mule_account_bankcode'
+    missing_mule_account_bankname:
+        code: '6705'
+        msg: 'Missing required field: mule_account_bankname'
+    missing_mule_account_bankname_value:
+        code: '6705'
+        msg: 'Missing required field: mule_account_bankname'
+    missing_mule_nationality:
+        code: '6705'
+        msg: 'Missing required field: mule_nationality'
+    missing_mule_nationality_value:
+        code: '6705'
+        msg: 'Missing required field: mule_nationality'
+    missing_police_case_id:
+        code: '6705'
+        msg: 'Missing required field: police_case_id'
+    missing_police_case_type:
+        code: '6705'
+        msg: 'Missing required field: police_case_type'
+    missing_police_case_report_date:
+        code: '6705'
+        msg: 'Missing required field: police_case_report_date'
+    missing_police_rank:
+        code: '6705'
+        msg: 'Missing required field: police_rank'
+    missing_police_rank_value:
+        code: '6705'
+        msg: 'Missing required field: police_rank'
+    missing_police_name:
+        code: '6705'
+        msg: 'Missing required field: police_name'
+    missing_police_name_value:
+        code: '6705'
+        msg: 'Missing required field: police_name'
+    missing_police_surname:
+        code: '6705'
+        msg: 'Missing required field: police_surname'
+    missing_police_surname_value:
+        code: '6705'
+        msg: 'Missing required field: police_surname'
+    missing_police_job_title:
+        code: '6705'
+        msg: 'Missing required field: police_job_title'
+    missing_police_job_title_value:
+        code: '6705'
+        msg: 'Missing required field: police_job_title'
+    missing_police_org:
+        code: '6705'
+        msg: 'Missing required field: police_org'
+    missing_police_org_value:
+        code: '6705'
+        msg: 'Missing required field: police_org'
+    missing_police_tel:
+        code: '6705'
+        msg: 'Missing required field: police_tel'
+    missing_police_tel_value:
+        code: '6705'
+        msg: 'Missing required field: police_tel'
+    missing_police_email:
+        code: '6705'
+        msg: 'Missing required field: police_email'
+    missing_police_email_value:
+        code: '6705'
+        msg: 'Missing required field: police_email'
+    invalid_declare_type_code_6701:
+        code: '6701'
+        msg: 'Invalid declare_type_code'
+    invalid_file_name_format:
+        code: '6103'
+        msg: 'INVALID_FILE_NAME_FORMAT'
+    invalid_date_on_filename:
+        code: '6709'
+        msg: 'INVALID_DATE_ON_FILENAME'
+    invalid_sys_transaction:
+        code: '6113'
+        msg: 'SYSTEM_REQUIRED_AT_LEAST_ONE_TRANSACTION'
+    invalid_sys_transaction:
+        code: '6113'
+        msg: 'SYSTEM_REQUIRED_AT_LEAST_ONE_TRANSACTION'
+    invalid_format_mule_name:
+        code: '6706'
+        msg: 'Invalid format: mule_name'
+    invalid_format_mule_birth_date:
+        code: '6706'
+        msg: 'Invalid format: mule_birth_date'
+    invalid_format_police_case_id:
+        code: '6706'
+        msg: 'Invalid format: police_case_id'
+    invalid_police_case_type:
+        code: '6706'
+        msg: 'Invalid format: police_case_type'
+    invalid_police_case_report_date:
+        code: '6706'
+        msg: 'Invalid format: police_case_report_date'
+    invalid_format_police_rank:
+        code: '6706'
+        msg: 'Invalid format: police_rank'
+    invalid_format_police_name:
+        code: '6706'
+        msg: 'Invalid format: police_name'
+    invalid_format_police_surname:
+        code: '6706'
+        msg: 'Invalid format: police_surname'
+    invalid_format_police_job_title:
+        code: '6706'
+        msg: 'Invalid format: police_job_title'
+    invalid_format_police_email:
+        code: '6706'
+        msg: 'Invalid format: police_email'
+    invalid_format_police_org:
+        code: '6706'
+        msg: 'Invalid format: police_org'
+    invalid_format_police_tel:
+        code: '6706'
+        msg: 'Invalid format: police_tel'
+    invalid_format_police_case_report_date:
+        code: '6706'
+        msg: 'Invalid format: police_case_report_date'
+    invalid_format_mule_account_no:
+        code: '6706'
+        msg: 'Invalid format: mule_account_no'
+    invalid_format_mule_account_type:
+        code: '6706'
+        msg: 'Invalid format: mule_account_type'
+    invalid_format_mule_account_bankcode:
+        code: '6706'
+        msg: 'Invalid format: mule_account_bankcode'
+    invalid_format_mule_account_bankname:
+        code: '6706'
+        msg: 'Invalid format: mule_account_bankname'
+    invalid_date_no_filename_withdraw:
+        code: '6109'
+        msg: 'INVALID_DATE_ON_FILENAME'
+    duplicate_within_the_same_file:
+        code: '6709'
+        msg: 'mule_ref_code, declare_type are duplicate within the same file'
+    invalida_mule_iden_and_mule_ref_match_sys:
+        code: '6704'
+        msg: 'mule_identity_id, mule_ref_code must be match with CFR mule list in the system'
+    invalida_mule_iden_not_match_sys:
+        code: '6702'
+        msg: 'Does not match the mule_identity_id in the CFR mule list'
+    SOME_ITEM_DUPLICATE_Withdraw:
+        code: '6108'
+        msg: 'SOME_ITEM_DUPLICATE'
+    UNABLE_TO_DECRYPT_OR_UNIDENTITY_SENDER_OF_FILE:
+        code: '6400'
+        msg: 'UNABLE_TO_DECRYPT_OR_UNIDENTITY_SENDER_OF_FILE'
+WithDrawBlackMule:
+    SUCCESS:
+        code: '0000'
+        msg: 'SUCCESS'
+        status: 'INACTIVE'
+    Invalid_format_declare_uuid:
+        code: '7106'
+        msg: 'Invalid format: declare_uuid'
+    Invalid_format_declare_type_code:
+        code: '7106'
+        msg: 'Invalid format: declare_type_code'
+    Invalid_format_declare_type:
+        code: '7106'
+        msg: 'Invalid format: declare_type'
+    Invalid_format_withdraw_date:
+        code: '7106'
+        msg: 'Invalid format: withdraw_date'
+    Invalid_format_declare_reason_code:
+        code: '7106'
+        msg: 'Invalid format: declare_reason_code'
+    Invalid_format_declare_reason:
+        code: '7106'
+        msg: 'Invalid format: declare_reason'
+    Invalid_format_declare_note:
+        code: '7106'
+        msg: 'Invalid format: declare_note'
+    Invalid_format_mule_ref_code:
+        code: '7106'
+        msg: 'Invalid format: mule_ref_code'
+    Invalid_format_mule_identity_id:
+        code: '7106'
+        msg: 'Invalid format: mule_identity_id'
+    Invalid_format_mule_identity_type:
+        code: '7106'
+        msg: 'Invalid format: mule_identity_type'
+    Invalid_format_mule_title:
+        code: '7106'
+        msg: 'Invalid format: mule_title'
+    Invalid_format_mule_name:
+        code: '7106'
+        msg: 'Invalid format: mule_name'
+    Invalid_format_mule_surname:
+        code: '7106'
+        msg: 'Invalid format: mule_surname'
+    Invalid_format_mule_birth_date:
+        code: '7106'
+        msg: 'Invalid format: mule_birth_date'
+    Invalid_format_mule_nationality:
+        code: '7106'
+        msg: 'Invalid format: mule_nationality'
+    Invalid_format_police_case_type:
+        code: '7106'
+        msg: 'Invalid format: police_case_type'
+    Invalid_format_police_case_report_date:
+        code: '7106'
+        msg: 'Invalid format: police_case_report_date'
+    Invalid_format_mule_account_no:
+        code: '7106'
+        msg: 'Invalid format: mule_account_no'
+    Invalid_format_mule_account_type:
+        code: '7106'
+        msg: 'Invalid format: mule_account_type'
+    Invalid_format_mule_account_bankcode:
+        code: '7106'
+        msg: 'Invalid format: mule_account_bankcode'
+    Invalid_format_mule_account_bankname:
+        code: '7106'
+        msg: 'Invalid format: mule_account_bankname'
+    Invalid_format_police_rank:
+        code: '7106'
+        msg: 'Invalid format: police_rank'
+    Invalid_format_police_case_id:
+        code: '7106'
+        msg: 'Invalid format: police_case_id'
+    Invalid_format_police_name:
+        code: '7106'
+        msg: 'Invalid format: police_name'
+    Invalid_format_police_surname:
+        code: '7106'
+        msg: 'Invalid format: police_surname'
+    Invalid_format_police_job_title:
+        code: '7106'
+        msg: 'Invalid format: police_job_title'
+    Invalid_format_police_org:
+        code: '7106'
+        msg: 'Invalid format: police_org'
+    Invalid_format_police_tel:
+        code: '7106'
+        msg: 'Invalid format: police_tel'
+    Invalid_format_police_email:
+        code: '7106'
+        msg: 'Invalid format: police_email'
+    Invalid_format_Missing_field_uuid:
+        code: '7105'
+        msg: 'Missing required field: declare_uuid'
+    Invalid_Missing_field_de_type_code:
+        code: '7105'
+        msg: 'Missing required field: declare_type_code'
+    Invalid_Missing_field_de_type:
+        code: '7105'
+        msg: 'Missing required field: declare_type'
+    Invalid_Missing_field_withdraw_date:
+        code: '7105'
+        msg: 'Missing required field: withdraw_date'
+    Invalid_Missing_field_declare_reason_code:
+        code: '7105'
+        msg: 'Missing required field: declare_reason_code'
+    Invalid_Missing_field_declare_reason:
+        code: '7105'
+        msg: 'Missing required field: declare_reason'
+    Invalid_Missing_field_declare_note:
+        code: '7105'
+        msg: 'Missing required field: declare_note'
+    Invalid_Missing_field_mule_ref_code:
+        code: '7105'
+        msg: 'Missing required field: mule_ref_code'
+    Invalid_Missing_field_mule_identity_id:
+        code: '7105'
+        msg: 'Missing required field: mule_identity_id'
+    Invalid_Missing_field_mule_identity_type:
+        code: '7105'
+        msg: 'Missing required field: mule_identity_type'
+    Invalid_Missing_field_mule_title:
+        code: '7105'
+        msg: 'Missing required field: mule_title'
+    Invalid_Missing_field_mule_name:
+        code: '7105'
+        msg: 'Missing required field: mule_name'
+    Invalid_Missing_field_mule_surname:
+        code: '7105'
+        msg: 'Missing required field: mule_surname'
+    Invalid_Missing_field_mule_birth_date:
+        code: '7105'
+        msg: 'Missing required field: mule_birth_date'
+    Invalid_Missing_field_mule_nationality:
+        code: '7105'
+        msg: 'Missing required field: mule_nationality'
+    Invalid_Missing_field_police_case_id:
+        code: '7105'
+        msg: 'Missing required field: police_case_id'
+    Invalid_Missing_field_police_case_type:
+        code: '7105'
+        msg: 'Missing required field: police_case_type'
+    Invalid_Missing_field_police_case_report_date:
+        code: '7105'
+        msg: 'Missing required field: police_case_report_date'
+    Invalid_Missing_field_mule_account_no:
+        code: '7105'
+        msg: 'Missing required field: mule_account_no'
+    Invalid_Missing_field_mule_account_type:
+        code: '7105'
+        msg: 'Missing required field: mule_account_type'
+    Invalid_Missing_field_mule_account_bankcode:
+        code: '7105'
+        msg: 'Missing required field: mule_account_bankcode'
+    Invalid_Missing_field_mule_account_bankname:
+        code: '7105'
+        msg: 'Missing required field: mule_account_bankname'
+    Invalid_Missing_field_police_rank:
+        code: '7105'
+        msg: 'Missing required field: police_rank'
+    Invalid_Missing_field_police_name:
+        code: '7105'
+        msg: 'Missing required field: police_name'
+    Invalid_Missing_field_police_surname:
+        code: '7105'
+        msg: 'Missing required field: police_surname'
+    Invalid_Missing_field_police_job_title:
+        code: '7105'
+        msg: 'Missing required field: police_job_title'
+    Invalid_Missing_field_police_org:
+        code: '7105'
+        msg: 'Missing required field: police_org'
+    Invalid_Missing_field_police_tel:
+        code: '7105'
+        msg: 'Missing required field: police_tel'
+    Invalid_Missing_field_police_email:
+        code: '7105'
+        msg: 'Missing required field: police_email'
+    Invalid_format_Missing_Parameter_field_uuid:
+        code: '7105'
+        msg: 'Missing required field: declare_uuid'
+    Invalid_format_Missing_Parameter_field_de_type_code:
+        code: '7105'
+        msg: 'Missing required field: declare_type_code'
+    Invalid_format_Missing_Parameter_field_de_type:
+        code: '7105'
+        msg: 'Missing required field: declare_type'
+    Invalid_Missing_Parameter_field_withdraw_date:
+        code: '7105'
+        msg: 'Missing required field: withdraw_date'
+    Invalid_Missing_Parameter_field_de_reason_code:
+        code: '7105'
+        msg: 'Missing required field: declare_reason_code'
+    Invalid_format_Missing_Parameter_de_note:
+        code: '7105'
+        msg: 'Missing required field: declare_note'
+    Invalid_format_Missing_Parameter_de_reason:
+        code: '7105'
+        msg: 'Missing required field: declare_reason'
+    Invalid_format_Missing_Parameter_mule_ref_code:
+        code: '7105'
+        msg: 'Missing required field: mule_ref_code'
+    Invalid_format_Missing_Parameter_mule_iden_id:
+        code: '7105'
+        msg: 'Missing required field: mule_identity_id'
+    Invalid_format_Missing_Parameter_mule_iden_type:
+        code: '7105'
+        msg: 'Missing required field: mule_identity_type'
+    Invalid_format_Missing_Parameter_mule_name:
+        code: '7105'
+        msg: 'Missing required field: mule_name'
+    Invalid_format_Missing_Parameter_mule_surname:
+        code: '7105'
+        msg: 'Missing required field: mule_surname'
+    Invalid_format_Missing_Parameter_mule_nationality:
+        code: '7105'
+        msg: 'Missing required field: mule_nationality'
+    Invalid_format_Missing_Parameter_po_case_id:
+        code: '7105'
+        msg: 'Missing required field: police_case_id'
+    Invalid_format_Missing_Parameter_po_case_type:
+        code: '7105'
+        msg: 'Missing required field: police_case_type'
+    Invalid_format_Missing_Parameter_po_case_rp_date:
+        code: '7105'
+        msg: 'Missing required field: police_case_report_date'
+    Invalid_format_Missing_Parameter_mule_acc_no:
+        code: '7105'
+        msg: 'Missing required field: mule_account_no'
+    Invalid_format_Missing_Parameter_mule_acc_type:
+        code: '7105'
+        msg: 'Missing required field: mule_account_type'
+    Invalid_format_Missing_Parameter_mule_acc_bankcode:
+        code: '7105'
+        msg: 'Missing required field: mule_account_bank_code'
+    Invalid_format_Missing_Parameter_mule_acc_bankname:
+        code: '7105'
+        msg: 'Missing required field: mule_account_bankname'
+    Invalid_format_Missing_Parameter_po_rank:
+        code: '7105'
+        msg: 'Missing required field: police_rank'
+    Invalid_format_Missing_Parameter_po_name:
+        code: '7105'
+        msg: 'Missing required field: police_name'
+    Invalid_format_Missing_Parameter_po_surname:
+        code: '7105'
+        msg: 'Missing required field: police_surname'
+    Invalid_format_Missing_Parameter_po_job_title:
+        code: '7105'
+        msg: 'Missing required field: police_job_title'
+    Invalid_format_Missing_Parameter_po_org:
+        code: '7105'
+        msg: 'Missing required field: police_org'
+    Invalid_format_Missing_Parameter_po_tel:
+        code: '7105'
+        msg: 'Missing required field: police_tel'
+    Invalid_format_Missing_Parameter_po_email:
+        code: '7105'
+        msg: 'Missing required field: police_email'
+    Invalid_format_Non_processable_Entity:
+        code: '7106'
+        msg: 'Invalid format: Non-processable Entity'
+    Invalid_FILE_EXCEED_LIMIT:
+        code: '6107'
+        msg: 'FILE_EXCEED_LIMIT'
+    Invalid_Does_not_match_mule_iden_ID_list:
+        code: '7102'
+        msg: 'Does not match the mule_Identity_id in the CFR mule list'
+    Invalid_declare_type_code:
+        code: '7101'
+        msg: 'Invalid declare_type_code'
+    invalida_mule_iden_and_mule_ref_match_sys:
+        code: '7104'
+        msg: 'mule_identity_id, mule_ref_code must be match with CFR mule list in the system'
+    invalida_mule_iden_and_mule_ref_dup_same_file:
+        code: '7109'
+        msg: 'mule_ref_code, declare_type are duplicate within the same file'
+    Invalid_value_condition_declare_reason:
+        code: '7107'
+        msg: 'Invalid value condition: declare_reason'
+    Invalid_value_condition_withdraw_date:
+        code: '7107'
+        msg: 'Invalid value condition: withdraw_date'
+    Invalid_value_condition_police_case_report_date:
+        code: '7107'
+        msg: 'Invalid value condition: police_case_report_date'
+    Invalid_condition_mule_nationality:
+        code: '7107'
+        msg: 'Invalid value condition: mule_nationality'
+    Invalid_condition_mule_birth_date:
+        code: '7107'
+        msg: 'Invalid value condition: mule_birth_date'
+    Invalid_file_name:
+        code: '6103'
+        msg: 'INVALID_FILE_NAME_FORMAT'
+    Invalid_record:
+        code: '6106'
+        msg: 'RECORD_EXCEED_LIMIT'
+    invalid_date_no_filename:
+        code: '6109'
+        msg: 'INVALID_DATE_ON_FILENAME'
+    duplicate_filename:
+        code: '6110'
+        msg: 'DUPLICATE_FILENAME'
+    invalid_req_format:
+        code: '6113'
+        msg: 'SYSTEM_REQUIRED_AT_LEAST_ONE_TRANSACTION'
+    SOME_ITEM_DUPLICATE:
+        code: '6108'
+        msg: 'SOME_ITEM_DUPLICATE'
+    INVALID_SIGNATURE:
+        code: '6300'
+        msg: 'INVALID_SIGNATURE'

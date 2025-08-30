@@ -1,0 +1,14 @@
+verify_transactionId:
+    cash:
+        notfound: "201802026013025000"
+        result_code_unsuccess: "2018315248000679254"
+        service_code_notmatch: "2018226545000471920"
+        transaction_data_null: "201802026113027895"
+        transaction_resultcode_empty: "2018020261190827895"
+    wallet:
+        notfound: "2018020260130251234"
+        result_code_unsuccess: "20180404184119"
+
+void_transaction:
+    cash:
+         confirm_trans_notfound: "20180510184815"
