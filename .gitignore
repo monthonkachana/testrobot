@@ -9,3 +9,4 @@ log.html
 */log.html
 keywords/*txt
 /pythonlibs
+/py/__pycache__
