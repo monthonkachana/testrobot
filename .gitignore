@@ -7,3 +7,4 @@
 node_modules/
 dist/
 result/
+/py/__pycache__
